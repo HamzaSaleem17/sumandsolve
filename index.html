@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sum and Solve - Math Quiz Game</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #333;
+            overflow: hidden;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            padding: 30px;
+            max-width: 600px;
+            width: 90%;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(102, 126, 234, 0.1) 0%, transparent 70%);
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+
+        h1 {
+            color: #667eea;
+            font-size: 2.5em;
+            margin-bottom: 5px;
+            position: relative;
+            z-index: 1;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .tagline {
+            color: #764ba2;
+            font-size: 1em;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .game-area {
+            position: relative;
+            z-index: 1;
+        }
+
+        .screen {
+            display: none;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .screen.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .start-screen h2 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.8em;
+        }
+
+        .start-screen p {
+            color: #666;
+            margin-bottom: 25px;
+            line-height: 1.5;
+            font-size: 0.95em;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 35px;
+            font-size: 1.1em;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .stats-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            gap: 15px;
+        }
+
+        .stat-item {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 10px 20px;
+            border-radius: 50px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex: 1;
+            transition: all 0.3s ease;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        .stat-icon {
+            font-size: 1.2em;
+            color: #667eea;
+        }
+
+        .stat-value {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #764ba2;
+        }
+
+        .timer-container {
+            width: 100%;
+            height: 8px;
+            background: #e0e0e0;
+            border-radius: 10px;
+            margin: 15px 0;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .timer-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #4caf50, #8bc34a);
+            border-radius: 10px;
+            transition: width 0.1s linear;
+            position: relative;
+        }
+
+        .timer-bar.warning {
+            background: linear-gradient(90deg, #ff9800, #ffc107);
+        }
+
+        .timer-bar.danger {
+            background: linear-gradient(90deg, #f44336, #e91e63);
+        }
+
+        .difficulty-indicator {
+            display: inline-block;
+            padding: 5px 15px;
+            background: #667eea;
+            color: white;
+            border-radius: 20px;
+            font-size: 0.85em;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        .question {
+            font-size: 2.5em;
+            color: #333;
+            margin: 20px 0;
+            font-weight: 300;
+            letter-spacing: 2px;
+        }
+
+        .answers {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin: 20px 0;
+        }
+
+        .answer-btn {
+            background: white;
+            border: 3px solid #e0e0e0;
+            padding: 18px;
+            font-size: 1.4em;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            font-weight: 500;
+        }
+
+        .answer-btn:hover {
+            border-color: #667eea;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .answer-btn.correct {
+            background: #4caf50;
+            color: white;
+            border-color: #4caf50;
+            animation: correctPulse 0.6s ease;
+        }
+
+        .answer-btn.incorrect {
+            background: #f44336;
+            color: white;
+            border-color: #f44336;
+            animation: shake 0.5s ease;
+        }
+
+        @keyframes correctPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+
+        .feedback {
+            margin: 15px 0;
+            font-size: 1.1em;
+            height: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 500;
+        }
+
+        .feedback.correct {
+            color: #4caf50;
+        }
+
+        .feedback.incorrect {
+            color: #f44336;
+        }
+
+        .game-over h2 {
+            color: #667eea;
+            font-size: 2.2em;
+            margin-bottom: 15px;
+        }
+
+        .final-score {
+            font-size: 3.5em;
+            color: #764ba2;
+            margin: 15px 0;
+            font-weight: bold;
+        }
+
+        .performance-message {
+            font-size: 1.2em;
+            color: #666;
+            margin-bottom: 25px;
+        }
+
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #667eea;
+            animation: confetti-fall 3s ease-out forwards;
+        }
+
+        @keyframes confetti-fall {
+            0% {
+                transform: translateY(-100vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #667eea;
+            border-radius: 50%;
+            pointer-events: none;
+            animation: particle-float 1s ease-out forwards;
+        }
+
+        @keyframes particle-float {
+            0% {
+                transform: translate(0, 0) scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(var(--x), var(--y)) scale(0);
+                opacity: 0;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 2em;
+            }
+            
+            .question {
+                font-size: 2em;
+            }
+            
+            .answers {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-container {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .stat-item {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1><i class="fas fa-calculator"></i> Sum & Solve</h1>
+        <p class="tagline">Master Addition, Beat the Clock!</p>
+        
+        <div class="game-area">
+            <!-- Start Screen -->
+            <div class="screen start-screen active" id="startScreen">
+                <h2>Ready to Challenge Your Mind?</h2>
+                <p>Test your addition skills in this adaptive math quiz. The difficulty adjusts based on your performance. Answer quickly before time runs out!</p>
+                <button class="btn" onclick="startGame()"><i class="fas fa-play"></i> Start Quiz</button>
+            </div>
+
+            <!-- Game Screen -->
+            <div class="screen game-screen" id="gameScreen">
+                <div class="stats-container">
+                    <div class="stat-item">
+                        <i class="fas fa-star stat-icon"></i>
+                        <span class="stat-value" id="score">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <i class="fas fa-layer-group stat-icon"></i>
+                        <span class="stat-value" id="level">1</span>
+                    </div>
+                </div>
+                
+                <div class="difficulty-indicator" id="difficultyIndicator">Beginner</div>
+                
+                <div class="timer-container">
+                    <div class="timer-bar" id="timerBar"></div>
+                </div>
+                
+                <div class="question" id="question">5 + 3 = ?</div>
+                
+                <div class="answers" id="answers">
+                    <button class="answer-btn" onclick="checkAnswer(this)">8</button>
+                    <button class="answer-btn" onclick="checkAnswer(this)">7</button>
+                    <button class="answer-btn" onclick="checkAnswer(this)">9</button>
+                    <button class="answer-btn" onclick="checkAnswer(this)">6</button>
+                </div>
+                
+                <div class="feedback" id="feedback"></div>
+            </div>
+
+            <!-- Game Over Screen -->
+            <div class="screen game-over" id="gameOverScreen">
+                <h2><i class="fas fa-trophy"></i> Quiz Complete!</h2>
+                <div class="final-score" id="finalScore">0</div>
+                <div class="performance-message" id="performanceMessage">Great job!</div>
+                <button class="btn" onclick="resetGame()"><i class="fas fa-redo"></i> Play Again</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let score = 0;
+        let level = 1;
+        let difficulty = 1;
+        let currentQuestion = {};
+        let totalQuestions = 0;
+        let correctAnswers = 0;
+        let gameActive = true;
+        let isProcessing = false;
+        let timerInterval;
+        let timeLeft;
+        let totalTime;
+
+        const difficultySettings = {
+            1: { min: 1, max: 10, name: 'Beginner', points: 10, time: 8 },
+            2: { min: 5, max: 20, name: 'Easy', points: 15, time: 10 },
+            3: { min: 10, max: 50, name: 'Medium', points: 20, time: 12 },
+            4: { min: 20, max: 100, name: 'Hard', points: 25, time: 15 },
+            5: { min: 50, max: 200, name: 'Expert', points: 30, time: 18 }
+        };
+
+        function startGame() {
+            document.getElementById('startScreen').classList.remove('active');
+            document.getElementById('gameScreen').classList.add('active');
+            resetStats();
+            generateQuestion();
+        }
+
+        function resetStats() {
+            score = 0;
+            level = 1;
+            difficulty = 1;
+            totalQuestions = 0;
+            correctAnswers = 0;
+            gameActive = true;
+            isProcessing = false;
+            updateStats();
+        }
+
+        function updateStats() {
+            document.getElementById('score').textContent = score;
+            document.getElementById('level').textContent = level;
+            document.getElementById('difficultyIndicator').textContent = difficultySettings[difficulty].name;
+        }
+
+        function generateQuestion() {
+            if (!gameActive) return;
+            
+            clearInterval(timerInterval);
+            
+            const settings = difficultySettings[difficulty];
+            const num1 = Math.floor(Math.random() * (settings.max - settings.min + 1)) + settings.min;
+            const num2 = Math.floor(Math.random() * (settings.max - settings.min + 1)) + settings.min;
+            const correctAnswer = num1 + num2;
+            
+            currentQuestion = {
+                num1: num1,
+                num2: num2,
+                answer: correctAnswer
+            };
+            
+            document.getElementById('question').textContent = `${num1} + ${num2} = ?`;
+            
+            // Generate answer options
+            const answers = [correctAnswer];
+            while (answers.length < 4) {
+                const offset = Math.floor(Math.random() * 20) - 10;
+                const wrongAnswer = correctAnswer + offset;
+                if (wrongAnswer > 0 && !answers.includes(wrongAnswer)) {
+                    answers.push(wrongAnswer);
+                }
+            }
+            
+            // Shuffle answers
+            answers.sort(() => Math.random() - 0.5);
+            
+            // Update answer buttons
+            const answerBtns = document.querySelectorAll('.answer-btn');
+            answerBtns.forEach((btn, index) => {
+                btn.textContent = answers[index];
+                btn.classList.remove('correct', 'incorrect');
+                btn.disabled = false;
+            });
+            
+            document.getElementById('feedback').textContent = '';
+            isProcessing = false;
+            
+            // Start timer
+            startTimer();
+        }
+
+        function startTimer() {
+            totalTime = difficultySettings[difficulty].time;
+            timeLeft = totalTime;
+            updateTimerBar();
+            
+            timerInterval = setInterval(() => {
+                timeLeft -= 0.1;
+                updateTimerBar();
+                
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    handleTimeout();
+                }
+            }, 100);
+        }
+
+        function updateTimerBar() {
+            const percentage = (timeLeft / totalTime) * 100;
+            const timerBar = document.getElementById('timerBar');
+            timerBar.style.width = percentage + '%';
+            
+            // Change color based on time left
+            timerBar.classList.remove('warning', 'danger');
+            if (percentage <= 20) {
+                timerBar.classList.add('danger');
+            } else if (percentage <= 40) {
+                timerBar.classList.add('warning');
+            }
+        }
+
+        function handleTimeout() {
+            if (isProcessing || !gameActive) return;
+            
+            isProcessing = true;
+            totalQuestions++;
+            
+            // Mark all answers as incorrect
+            document.querySelectorAll('.answer-btn').forEach(btn => {
+                btn.disabled = true;
+                if (parseInt(btn.textContent) === currentQuestion.answer) {
+                    btn.classList.add('correct');
+                }
+            });
+            
+            document.getElementById('feedback').textContent = `Time's up! The answer was ${currentQuestion.answer}`;
+            document.getElementById('feedback').className = 'feedback incorrect';
+            
+            // Decrease difficulty on timeout
+            if (difficulty > 1) {
+                difficulty--;
+                level = Math.max(1, level - 1);
+            }
+            
+            updateStats();
+            
+            // Auto-proceed to next question or end game
+            setTimeout(() => {
+                if (totalQuestions >= 20) {
+                    endGame();
+                } else {
+                    generateQuestion();
+                }
+            }, 1500);
+        }
+
+        function checkAnswer(btn) {
+            if (isProcessing || !gameActive) return;
+            
+            isProcessing = true;
+            clearInterval(timerInterval);
+            
+            const selectedAnswer = parseInt(btn.textContent);
+            const isCorrect = selectedAnswer === currentQuestion.answer;
+            
+            totalQuestions++;
+            
+            if (isCorrect) {
+                btn.classList.add('correct');
+                // Bonus points for speed
+                const timeBonus = Math.floor((timeLeft / totalTime) * 5);
+                score += difficultySettings[difficulty].points + timeBonus;
+                correctAnswers++;
+                document.getElementById('feedback').textContent = `Correct! +${difficultySettings[difficulty].points + timeBonus} points`;
+                document.getElementById('feedback').className = 'feedback correct';
+                
+                // Create particle effect
+                createParticles(btn);
+                
+                // Increase difficulty
+                if (correctAnswers % 3 === 0 && difficulty < 5) {
+                    difficulty++;
+                    level++;
+                    createConfetti();
+                }
+            } else {
+                btn.classList.add('incorrect');
+                // Show correct answer
+                document.querySelectorAll('.answer-btn').forEach(b => {
+                    if (parseInt(b.textContent) === currentQuestion.answer) {
+                        b.classList.add('correct');
+                    }
+                });
+                document.getElementById('feedback').textContent = `Incorrect! The answer was ${currentQuestion.answer}`;
+                document.getElementById('feedback').className = 'feedback incorrect';
+                
+                // Decrease difficulty
+                if (difficulty > 1) {
+                    difficulty--;
+                    level = Math.max(1, level - 1);
+                }
+            }
+            
+            // Disable all buttons
+            document.querySelectorAll('.answer-btn').forEach(b => b.disabled = true);
+            
+            updateStats();
+            
+            // Auto-proceed to next question or end game
+            setTimeout(() => {
+                if (totalQuestions >= 20) {
+                    endGame();
+                } else {
+                    generateQuestion();
+                }
+            }, 1500);
+        }
+
+        function createParticles(element) {
+            const rect = element.getBoundingClientRect();
+            const containerRect = document.querySelector('.container').getBoundingClientRect();
+            
+            for (let i = 0; i < 10; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = (rect.left - containerRect.left + rect.width / 2) + 'px';
+                particle.style.top = (rect.top - containerRect.top + rect.height / 2) + 'px';
+                particle.style.setProperty('--x', (Math.random() - 0.5) * 100 + 'px');
+                particle.style.setProperty('--y', (Math.random() - 0.5) * 100 + 'px');
+                particle.style.background = ['#667eea', '#764ba2', '#4caf50', '#8bc34a'][Math.floor(Math.random() * 4)];
+                
+                document.querySelector('.container').appendChild(particle);
+                setTimeout(() => particle.remove(), 1000);
+            }
+        }
+
+        function endGame() {
+            gameActive = false;
+            clearInterval(timerInterval);
+            document.getElementById('gameScreen').classList.remove('active');
+            document.getElementById('gameOverScreen').classList.add('active');
+            document.getElementById('finalScore').textContent = score;
+            
+            const accuracy = (correctAnswers / totalQuestions * 100).toFixed(1);
+            let message = '';
+            
+            if (accuracy >= 90) {
+                message = 'Outstanding! You\'re a math wizard! 🌟';
+            } else if (accuracy >= 70) {
+                message = 'Great job! Keep practicing! 👏';
+            } else if (accuracy >= 50) {
+                message = 'Good effort! Practice makes perfect! 💪';
+            } else {
+                message = 'Keep trying! You\'ll get better! 📚';
+            }
+            
+            document.getElementById('performanceMessage').textContent = 
+                `${message} (Accuracy: ${accuracy}%)`;
+        }
+
+        function resetGame() {
+            document.getElementById('gameOverScreen').classList.remove('active');
+            document.getElementById('startScreen').classList.add('active');
+        }
+
+        function createConfetti() {
+            const colors = ['#667eea', '#764ba2', '#f093fb', '#f5576c', '#4facfe', '#00f2fe'];
+            for (let i = 0; i < 20; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.style.left = Math.random() * 100 + '%';
+                    confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.animationDelay = Math.random() * 0.5 + 's';
+                    document.querySelector('.container').appendChild(confetti);
+                    
+                    setTimeout(() => confetti.remove(), 3000);
+                }, i * 50);
+            }
+        }
+    </script>
+</body>
+</html>
