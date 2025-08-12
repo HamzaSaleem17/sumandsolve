@@ -125,6 +125,15 @@
             background: #667eea;
         }
 
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5em;
+            cursor: pointer;
+            color: #667eea;
+        }
+
         /* Hero Section */
         .hero {
             padding: 120px 20px 60px;
@@ -234,6 +243,44 @@
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Settings Panel */
+        .settings-panel {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .settings-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .settings-group label {
+            font-weight: 500;
+            color: #555;
+        }
+
+        .settings-group input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+        .settings-group select {
+            padding: 5px 10px;
+            border: 2px solid #e0e0e0;
+            border-radius: 5px;
+            background: white;
+            cursor: pointer;
         }
 
         /* Start Screen */
@@ -478,6 +525,30 @@
             text-align: center;
         }
 
+        .high-scores {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .high-scores h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .high-score-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .high-score-item:last-child {
+            border-bottom: none;
+        }
+
         .share-buttons {
             display: flex;
             justify-content: center;
@@ -545,6 +616,22 @@
             }
         }
 
+        /* Loading */
+        .loading {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+        }
+
+        .loading i {
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
         /* Footer */
         .footer {
             background: rgba(255, 255, 255, 0.1);
@@ -592,14 +679,28 @@
                 font-size: 1.1em;
             }
             
-            .nav-links {
-                flex-direction: column;
-                gap: 10px;
+            .menu-toggle {
+                display: block;
             }
             
-            .nav-container {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: white;
                 flex-direction: column;
-                gap: 15px;
+                padding: 20px;
+                box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .nav-links a.active::after {
+                display: none;
             }
             
             body {
@@ -626,6 +727,11 @@
             .stat-box {
                 width: 100%;
             }
+            
+            .settings-panel {
+                flex-direction: column;
+                align-items: stretch;
+            }
         }
     </style>
 </head>
@@ -636,7 +742,10 @@
             <a href="index.html" class="logo">
                 <i class="fas fa-calculator"></i> Sum & Solve
             </a>
-            <ul class="nav-links">
+            <button class="menu-toggle" onclick="toggleMenu()">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-links" id="navLinks">
                 <li><a href="index.html" class="active">Home</a></li>
                 <li><a href="about.html">About</a></li>
                 <li><a href="leaderboard.html">Leaderboard</a></li>
@@ -663,6 +772,32 @@
                 <div class="screen start-screen active" id="startScreen">
                     <h2>Ready to Challenge Your Mind?</h2>
                     <p>Test your addition skills in this adaptive math quiz. The difficulty adjusts based on your performance. Answer quickly before time runs out!</p>
+                    
+                    <div class="settings-panel">
+                        <div class="settings-group">
+                            <label>
+                                <input type="checkbox" id="soundToggle" checked> 
+                                Sound Effects
+                            </label>
+                        </div>
+                        <div class="settings-group">
+                            <label>
+                                <input type="checkbox" id="animationToggle" checked> 
+                                Animations
+                            </label>
+                        </div>
+                        <div class="settings-group">
+                            <label>Difficulty:</label>
+                            <select id="difficultySelect">
+                                <option value="auto">Auto</option>
+                                <option value="1">Beginner</option>
+                                <option value="2">Easy</option>
+                                <option value="3">Medium</option>
+                                <option value="4">Hard</option>
+                                <option value="5">Expert</option>
+                            </select>
+                        </div>
+                    </div>
                     
                     <ul class="features-list">
                         <li><i class="fas fa-check-circle"></i> Adaptive difficulty that matches your skill level</li>
@@ -695,39 +830,44 @@
                         <div class="difficulty-indicator" id="difficultyIndicator">Beginner</div>
                     </div>
                     
-                    <div class="timer-container">
-                        <div class="timer-bar" id="timerBar"></div>
+                    <div class="timer-container" role="timer" aria-label="Time remaining">
+                        <div class="timer-bar" id="timerBar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                     
-                    <div class="question" id="question">5 + 3 = ?</div>
+                    <div class="question" id="question" aria-live="polite">5 + 3 = ?</div>
                     
-                    <div class="answers" id="answers">
-                        <button class="answer-btn" onclick="checkAnswer(this)">8</button>
-                        <button class="answer-btn" onclick="checkAnswer(this)">7</button>
-                        <button class="answer-btn" onclick="checkAnswer(this)">9</button>
-                        <button class="answer-btn" onclick="checkAnswer(this)">6</button>
+                    <div class="answers" id="answers" role="group" aria-label="Answer choices">
+                        <button class="answer-btn" onclick="checkAnswer(this)" aria-label="Answer option 1">8</button>
+                        <button class="answer-btn" onclick="checkAnswer(this)" aria-label="Answer option 2">7</button>
+                        <button class="answer-btn" onclick="checkAnswer(this)" aria-label="Answer option 3">9</button>
+                        <button class="answer-btn" onclick="checkAnswer(this)" aria-label="Answer option 4">6</button>
                     </div>
                     
-                    <div class="feedback" id="feedback"></div>
+                    <div class="feedback" id="feedback" aria-live="assertive" aria-atomic="true"></div>
                 </div>
 
                 <!-- Game Over Screen -->
                 <div class="screen game-over" id="gameOverScreen">
                     <h2><i class="fas fa-trophy"></i> Quiz Complete!</h2>
-                    <div class="final-score" id="finalScore">0</div>
-                    <div class="performance-message" id="performanceMessage">Great job!</div>
+                    <div class="final-score" id="finalScore" aria-live="polite">0</div>
+                    <div class="performance-message" id="performanceMessage" aria-live="polite">Great job!</div>
                     
-                    <div class="share-buttons">
-                        <button class="share-btn" onclick="shareOnTwitter()">
+                    <div class="high-scores" id="highScoresSection">
+                        <h3>High Scores</h3>
+                        <div id="highScoresList"></div>
+                    </div>
+                    
+                    <div class="share-buttons" aria-label="Share your score">
+                        <button class="share-btn" onclick="shareOnTwitter()" aria-label="Share on Twitter">
                             <i class="fab fa-twitter"></i> Twitter
                         </button>
-                        <button class="share-btn" onclick="shareOnFacebook()">
+                        <button class="share-btn" onclick="shareOnFacebook()" aria-label="Share on Facebook">
                             <i class="fab fa-facebook-f"></i> Facebook
                         </button>
                     </div>
                     
                     <div style="text-align: center;">
-                        <button class="btn" onclick="resetGame()">
+                        <button class="btn" onclick="resetGame()" aria-label="Play the quiz again">
                             <i class="fas fa-redo"></i> Play Again
                         </button>
                     </div>
@@ -753,6 +893,14 @@
     </footer>
 
     <script>
+        // Sound effects
+        const sounds = {
+            correct: new Audio('data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmwhBSuBzvLZiTYIG2m98OScTgwOUarm7blmFgU7k9n1unEiBC13yO/eizEIHWq+8+OWT'),
+            incorrect: new Audio('data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmwhBSuBzvLZiTYIG2m98OScTgwOUarm7blmFgU7k9n1unEiBC13yO/eizEIHWq+8+OWT'),
+            levelUp: new Audio('data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmwhBSuBzvLZiTYIG2m98OScTgwOUarm7blmFgU7k9n1unEiBC13yO/eizEIHWq+8+OWT')
+        };
+
+        // Game variables
         let score = 0;
         let level = 1;
         let difficulty = 1;
@@ -773,13 +921,37 @@
             5: { min: 50, max: 200, name: 'Expert', points: 30, time: 18 }
         };
 
+        // Toggle mobile menu
+        function toggleMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+        }
+
+        // Play sound effect
+        function playSound(type) {
+            if (document.getElementById('soundToggle').checked && sounds[type]) {
+                sounds[type].currentTime = 0;
+                sounds[type].play().catch(() => {});
+            }
+        }
+
+        // Start game
         function startGame() {
             document.getElementById('startScreen').classList.remove('active');
             document.getElementById('gameScreen').classList.add('active');
             resetStats();
+            
+            // Set initial difficulty
+            const difficultySelect = document.getElementById('difficultySelect');
+            if (difficultySelect.value !== 'auto') {
+                difficulty = parseInt(difficultySelect.value);
+                level = difficulty;
+            }
+            
             generateQuestion();
         }
 
+        // Reset stats
         function resetStats() {
             score = 0;
             level = 1;
@@ -791,64 +963,72 @@
             updateStats();
         }
 
+        // Update stats display
         function updateStats() {
             document.getElementById('score').textContent = score;
             document.getElementById('level').textContent = level;
             document.getElementById('difficultyIndicator').textContent = difficultySettings[difficulty].name;
         }
 
+        // Generate question
         function generateQuestion() {
             if (!gameActive) return;
             
             clearInterval(timerInterval);
             
-            const settings = difficultySettings[difficulty];
-            const num1 = Math.floor(Math.random() * (settings.max - settings.min + 1)) + settings.min;
-            const num2 = Math.floor(Math.random() * (settings.max - settings.min + 1)) + settings.min;
-            const correctAnswer = num1 + num2;
+            // Show loading state
+            document.getElementById('question').innerHTML = '<div class="loading"><i class="fas fa-spinner"></i> Loading...</div>';
             
-            currentQuestion = {
-                num1: num1,
-                num2: num2,
-                answer: correctAnswer
-            };
-            
-            document.getElementById('question').textContent = `${num1} + ${num2} = ?`;
-            
-            // Generate answer options
-            const answers = [correctAnswer];
-            while (answers.length < 4) {
-                const offset = Math.floor(Math.random() * 20) - 10;
-                const wrongAnswer = correctAnswer + offset;
-                if (wrongAnswer > 0 && !answers.includes(wrongAnswer)) {
-                    answers.push(wrongAnswer);
+            setTimeout(() => {
+                const settings = difficultySettings[difficulty];
+                const num1 = Math.floor(Math.random() * (settings.max - settings.min + 1)) + settings.min;
+                const num2 = Math.floor(Math.random() * (settings.max - settings.min + 1)) + settings.min;
+                const correctAnswer = num1 + num2;
+                
+                currentQuestion = {
+                    num1: num1,
+                    num2: num2,
+                    answer: correctAnswer
+                };
+                
+                document.getElementById('question').textContent = `${num1} + ${num2} = ?`;
+                
+                // Generate answer options
+                const answers = [correctAnswer];
+                while (answers.length < 4) {
+                    const offset = Math.floor(Math.random() * 20) - 10;
+                    const wrongAnswer = correctAnswer + offset;
+                    if (wrongAnswer > 0 && !answers.includes(wrongAnswer)) {
+                        answers.push(wrongAnswer);
+                    }
                 }
-            }
-            
-            // Shuffle answers
-            answers.sort(() => Math.random() - 0.5);
-            
-            // Update answer buttons
-            const answerBtns = document.querySelectorAll('.answer-btn');
-            answerBtns.forEach((btn, index) => {
-                btn.textContent = answers[index];
-                btn.classList.remove('correct', 'incorrect');
-                btn.disabled = false;
-            });
-            
-            document.getElementById('feedback').textContent = '';
-            isProcessing = false;
-            
-            // Start timer
-            startTimer();
+                
+                // Shuffle answers
+                answers.sort(() => Math.random() - 0.5);
+                
+                // Update answer buttons
+                const answerBtns = document.querySelectorAll('.answer-btn');
+                answerBtns.forEach((btn, index) => {
+                    btn.textContent = answers[index];
+                    btn.classList.remove('correct', 'incorrect');
+                    btn.disabled = false;
+                });
+                
+                document.getElementById('feedback').textContent = '';
+                isProcessing = false;
+                
+                // Start timer
+                startTimer();
+            }, 300);
         }
 
+        // Start timer
         function startTimer() {
             totalTime = difficultySettings[difficulty].time;
             timeLeft = totalTime;
             updateTimerBar();
             
-            timerInterval = setInterval(() => {
+            const animateTimer = () => {
                 timeLeft -= 0.1;
                 updateTimerBar();
                 
@@ -856,13 +1036,17 @@
                     clearInterval(timerInterval);
                     handleTimeout();
                 }
-            }, 100);
+            };
+            
+            timerInterval = setInterval(animateTimer, 100);
         }
 
+        // Update timer bar
         function updateTimerBar() {
-            const percentage = (timeLeft / totalTime) * 100;
+            const percentage = Math.max(0, (timeLeft / totalTime) * 100);
             const timerBar = document.getElementById('timerBar');
             timerBar.style.width = percentage + '%';
+            timerBar.setAttribute('aria-valuenow', Math.round(percentage));
             
             // Change color based on time left
             timerBar.classList.remove('warning', 'danger');
@@ -873,6 +1057,7 @@
             }
         }
 
+        // Handle timeout
         function handleTimeout() {
             if (isProcessing || !gameActive) return;
             
@@ -890,8 +1075,10 @@
             document.getElementById('feedback').textContent = `Time's up! The answer was ${currentQuestion.answer}`;
             document.getElementById('feedback').className = 'feedback incorrect';
             
+            playSound('incorrect');
+            
             // Decrease difficulty on timeout
-            if (difficulty > 1) {
+            if (difficulty > 1 && document.getElementById('difficultySelect').value === 'auto') {
                 difficulty--;
                 level = Math.max(1, level - 1);
             }
@@ -908,6 +1095,7 @@
             }, 1500);
         }
 
+        // Check answer
         function checkAnswer(btn) {
             if (isProcessing || !gameActive) return;
             
@@ -928,14 +1116,21 @@
                 document.getElementById('feedback').textContent = `Correct! +${difficultySettings[difficulty].points + timeBonus} points`;
                 document.getElementById('feedback').className = 'feedback correct';
                 
+                playSound('correct');
+                
                 // Create particle effect
-                createParticles(btn);
+                if (document.getElementById('animationToggle').checked) {
+                    createParticles(btn);
+                }
                 
                 // Increase difficulty
-                if (correctAnswers % 3 === 0 && difficulty < 5) {
+                if (correctAnswers % 3 === 0 && difficulty < 5 && document.getElementById('difficultySelect').value === 'auto') {
                     difficulty++;
                     level++;
-                    createConfetti();
+                    playSound('levelUp');
+                    if (document.getElementById('animationToggle').checked) {
+                        createConfetti();
+                    }
                 }
             } else {
                 btn.classList.add('incorrect');
@@ -948,8 +1143,10 @@
                 document.getElementById('feedback').textContent = `Incorrect! The answer was ${currentQuestion.answer}`;
                 document.getElementById('feedback').className = 'feedback incorrect';
                 
+                playSound('incorrect');
+                
                 // Decrease difficulty
-                if (difficulty > 1) {
+                if (difficulty > 1 && document.getElementById('difficultySelect').value === 'auto') {
                     difficulty--;
                     level = Math.max(1, level - 1);
                 }
@@ -970,6 +1167,7 @@
             }, 1500);
         }
 
+        // Create particle effect
         function createParticles(element) {
             const rect = element.getBoundingClientRect();
             const containerRect = document.querySelector('.game-card').getBoundingClientRect();
@@ -988,12 +1186,19 @@
             }
         }
 
+        // End game
         function endGame() {
             gameActive = false;
             clearInterval(timerInterval);
             document.getElementById('gameScreen').classList.remove('active');
             document.getElementById('gameOverScreen').classList.add('active');
             document.getElementById('finalScore').textContent = score;
+            
+            // Save high score
+            saveHighScore(score);
+            
+            // Display high scores
+            displayHighScores();
             
             const accuracy = (correctAnswers / totalQuestions * 100).toFixed(1);
             let message = '';
@@ -1012,11 +1217,50 @@
                 `${message} (Accuracy: ${accuracy}%)`;
         }
 
+        // Save high score
+        function saveHighScore(score) {
+            const highScores = JSON.parse(localStorage.getItem('sumAndSolveHighScores') || '[]');
+            const accuracy = (correctAnswers / totalQuestions * 100).toFixed(1);
+            
+            highScores.push({
+                score: score,
+                date: new Date().toLocaleDateString(),
+                accuracy: accuracy
+            });
+            
+            highScores.sort((a, b) => b.score - a.score);
+            highScores.splice(10); // Keep top 10
+            
+            localStorage.setItem('sumAndSolveHighScores', JSON.stringify(highScores));
+        }
+
+        // Display high scores
+        function displayHighScores() {
+            const highScores = JSON.parse(localStorage.getItem('sumAndSolveHighScores') || '[]');
+            const highScoresList = document.getElementById('highScoresList');
+            
+            if (highScores.length === 0) {
+                highScoresList.innerHTML = '<p style="text-align: center; color: #666;">No high scores yet!</p>';
+                return;
+            }
+            
+            highScoresList.innerHTML = highScores.map((score, index) => `
+                <div class="high-score-item">
+                    <span>#${index + 1}</span>
+                    <span>${score.score} points</span>
+                    <span>${score.accuracy}%</span>
+                    <span>${score.date}</span>
+                </div>
+            `).join('');
+        }
+
+        // Reset game
         function resetGame() {
             document.getElementById('gameOverScreen').classList.remove('active');
             document.getElementById('startScreen').classList.add('active');
         }
 
+        // Create confetti
         function createConfetti() {
             const colors = ['#667eea', '#764ba2', '#f093fb', '#f5576c', '#4facfe', '#00f2fe'];
             for (let i = 0; i < 30; i++) {
@@ -1033,16 +1277,31 @@
             }
         }
 
+        // Share on Twitter
         function shareOnTwitter() {
             const text = `I just scored ${score} points on Sum & Solve! Can you beat my score?`;
             const url = 'https://sumandsolve.com';
             window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`, '_blank');
         }
 
+        // Share on Facebook
         function shareOnFacebook() {
             const url = 'https://sumandsolve.com';
             window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`, '_blank');
         }
+
+        // Smooth scroll to game section
+        document.querySelector('.cta-button').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.querySelector('#game').scrollIntoView({ behavior: 'smooth' });
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('navLinks').classList.remove('active');
+            });
+        });
     </script>
 </body>
 </html>
