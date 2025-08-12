@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Sum & Solve Math Quiz</title>
+    <!-- Include all meta tags, favicon links, etc. same as index.html -->
+    
+    <style>
+        /* Include all the same base styles as index.html */
+        /* Add page-specific styles */
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            text-align: left;
+        }
+
+        .about-section {
+            margin-bottom: 40px;
+        }
+
+        .about-section h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 2em;
+        }
+
+        .about-section p {
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 15px;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 3em;
+            color: #667eea;
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .team-section {
+            background: #f8f9fa;
+            padding: 40px;
+            border-radius: 15px;
+            margin: 40px 0;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .team-member {
+            text-align: center;
+        }
+
+        .team-member img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin-bottom: 15px;
+        }
+
+        .team-member h4 {
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .team-member p {
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar (same as index.html) -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-calculator"></i> Sum & Solve
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html" class="active">About</a></li>
+                <li><a href="leaderboard.html">Leaderboard</a></li>
+                <li><a href="resources.html">Resources</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="about-content">
+            <section class="about-section">
+                <h1>About Sum & Solve</h1>
+                <p>Sum & Solve is an innovative online math quiz platform designed to make learning addition fun and engaging. Our adaptive learning system adjusts the difficulty based on your performance, ensuring that you're always challenged at just the right level.</p>
+                <p>Whether you're a student looking to improve your math skills, a teacher seeking educational tools, or just someone who loves numbers, Sum & Solve provides an entertaining way to practice and master addition.</p>
+            </section>
+
+            <section class="about-section">
+                <h2>Our Mission</h2>
+                <p>We believe that everyone can excel at mathematics with the right tools and approach. Our mission is to make math learning accessible, enjoyable, and effective for learners of all ages and skill levels.</p>
+                <p>By combining gamification elements with educational best practices, we create an environment where learning feels like playing, and improvement comes naturally.</p>
+            </section>
+
+            <section class="about-section">
+                <h2>Key Features</h2>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <h3>Adaptive Learning</h3>
+                        <p>Difficulty automatically adjusts based on your performance</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <h3>Timed Challenges</h3>
+                        <p>Improve your speed with our countdown timer</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3>Progress Tracking</h3>
+                        <p>Monitor your improvement with detailed statistics</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <h3>Achievement System</h3>
+                        <p>Earn points and unlock new levels as you progress</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="team-section">
+                <h2>Our Team</h2>
+                <div class="team-grid">
+                    <div class="team-member">
+                        <img src="https://via.placeholder.com/120" alt="Team member">
+                        <h4>Sarah Johnson</h4>
+                        <p>Founder & CEO</p>
+                    </div>
+                    <div class="team-member">
+                        <img src="https://via.placeholder.com/120" alt="Team member">
+                        <h4>Dr. Michael Chen</h4>
+                        <p>Educational Director</p>
+                    </div>
+                    <div class="team-member">
+                        <img src="https://via.placeholder.com/120" alt="Team member">
+                        <h4>Emily Rodriguez</h4>
+                        <p>Lead Developer</p>
+                    </div>
+                    <div class="team-member">
+                        <img src="https://via.placeholder.com/120" alt="Team member">
+                        <h4>David Kim</h4>
+                        <p>UX Designer</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</body>
+</html>

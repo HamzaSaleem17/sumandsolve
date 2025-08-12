@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resources - Sum & Solve Math Quiz</title>
+    <!-- Include all meta tags, favicon links, etc. -->
+    
+    <style>
+        /* Include all base styles */
+        .resources-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .resources-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .resources-header h1 {
+            color: #667eea;
+            font-size: 2.5em;
+            margin-bottom: 15px;
+        }
+
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .resource-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .resource-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .resource-icon {
+            font-size: 3em;
+            color: #667eea;
+            margin-bottom: 20px;
+        }
+
+        .resource-card h3 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .resource-card p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .resource-link {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .resource-link:hover {
+            text-decoration: underline;
+        }
+
+        .tips-section {
+            background: #f8f9fa;
+            padding: 40px;
+            border-radius: 15px;
+            margin: 50px 0;
+        }
+
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .tip-card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+        }
+
+        .tip-card h4 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .tip-card p {
+            color: #666;
+            font-size: 0.95em;
+            line-height: 1.5;
+        }
+
+        .download-section {
+            text-align: center;
+            margin: 50px 0;
+        }
+
+        .download-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 500;
+            transition: transform 0.3s ease;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-calculator"></i> Sum & Solve
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="leaderboard.html">Leaderboard</a></li>
+                <li><a href="resources.html" class="active">Resources</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="resources-content">
+            <div class="resources-header">
+                <h1><i class="fas fa-book"></i> Learning Resources</h1>
+                <p>Enhance your math skills with our curated collection of learning materials</p>
+            </div>
+
+            <div class="resources-grid">
+                <div class="resource-card">
+                    <div class="resource-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3>Addition Basics</h3>
+                    <p>Master the fundamentals of addition with our comprehensive guide covering basic concepts, number properties, and essential techniques.</p>
+                    <a href="#" class="resource-link">
+                        Start Learning <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <div class="resource-card">
+                    <div class="resource-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>Mental Math Strategies</h3>
+                    <p>Learn powerful mental math techniques to solve addition problems quickly and efficiently without relying on calculators.</p>
+                    <a href="#" class="resource-link">
+                        Explore Strategies <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <div class="resource-card">
+                    <div class="resource-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Practice Worksheets</h3>
+                    <p>Download printable worksheets organized by difficulty level to practice addition skills offline and track your progress.</p>
+                    <a href="#" class="resource-link">
+                        Download Worksheets <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <div class="resource-card">
+                    <div class="resource-icon">
+                        <i class="fas fa-video"></i>
+                    </div>
+                    <h3>Video Tutorials</h3>
+                    <p>Watch our expert instructors explain addition concepts through engaging video lessons with real-world examples.</p>
+                    <a href="#" class="resource-link">
+                        Watch Videos <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <div class="resource-card">
+                    <div class="resource-icon">
+                        <i class="fas fa-gamepad"></i>
+                    </div>
+                    <h3>Math Games</h3>
+                    <p>Discover fun addition games and activities that make learning math enjoyable for students of all ages.</p>
+                    <a href="#" class="resource-link">
+                        Play Games <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <div class="resource-card">
+                    <div class="resource-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Teacher Resources</h3>
+                    <p>Access lesson plans, classroom activities, and assessment tools designed specifically for math educators.</p>
+                    <a href="#" class="resource-link">
+                        For Teachers <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="tips-section">
+                <h2><i class="fas fa-lightbulb"></i> Pro Tips for Success</h2>
+                <div class="tips-grid">
+                    <div class="tip-card">
+                        <h4>Practice Daily</h4>
+                        <p>Consistent daily practice, even for just 10-15 minutes, can significantly improve your addition skills over time.</p>
+                    </div>
+                    <div class="tip-card">
+                        <h4>Start Simple</h4>
+                        <p>Begin with basic problems and gradually increase difficulty as you become more confident with your skills.</p>
+                    </div>
+                    <div class="tip-card">
+                        <h4>Use Real Objects</h4>
+                        <p>Count physical objects like coins, blocks, or fingers to visualize addition problems and build number sense.</p>
+                    </div>
+                    <div class="tip-card">
+                        <h4>Learn Patterns</h4>
+                        <p>Recognize number patterns and relationships to solve problems more quickly and efficiently.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="download-section">
+                <h2>Get Our Complete Learning Guide</h2>
+                <p>Download our free PDF guide with advanced addition strategies and practice problems</p>
+                <a href="#" class="download-btn">
+                    <i class="fas fa-download"></i> Download Free Guide
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
