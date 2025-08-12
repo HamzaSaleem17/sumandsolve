@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-GT5C5B4XFK"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -13,10 +14,12 @@
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 <link rel="manifest" href="/site.webmanifest">
+    <!-- Basic Meta Tags -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     
+    <!-- SEO Meta Tags -->
     <title>Sum & Solve - Free Online Math Addition Quiz Game</title>
     <meta name="description" content="Test your addition skills with Sum & Solve - an adaptive math quiz game that adjusts difficulty based on your performance. Perfect for students and math enthusiasts!">
     <meta name="keywords" content="math quiz, addition game, math practice, educational game, brain training, math skills, adaptive learning, free math game">
@@ -24,6 +27,7 @@
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://sumandsolve.com">
     
+    <!-- Open Graph Meta Tags -->
     <meta property="og:type" content="website">
     <meta property="og:title" content="Sum & Solve - Free Online Math Addition Quiz Game">
     <meta property="og:description" content="Challenge your mind with our adaptive math quiz! Perfect your addition skills with difficulty that adjusts to your level.">
@@ -34,6 +38,7 @@
     <meta property="og:image:height" content="630">
     <meta property="og:locale" content="en_US">
     
+    <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@SumAndSolve">
     <meta name="twitter:creator" content="@SumAndSolve">
@@ -63,15 +68,18 @@
 }
 </script>
  
+    <!-- Favicon and Icons -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="manifest" href="/site.webmanifest">
     
+    <!-- Preconnect for Performance -->
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     
+    <!-- Stylesheets -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
@@ -490,6 +498,7 @@
         </header>
         
         <main class="game-area">
+            <!-- Start Screen -->
             <section class="screen start-screen active" id="startScreen" aria-label="Game introduction">
                 <h2>Ready to Challenge Your Mind?</h2>
                 <p>Test your addition skills in this adaptive math quiz. The difficulty adjusts based on your performance. Answer quickly before time runs out!</p>
@@ -506,6 +515,7 @@
                 </button>
             </section>
 
+            <!-- Game Screen -->
             <section class="screen game-screen" id="gameScreen" aria-label="Game in progress">
                 <div class="stats-container" role="region" aria-label="Game statistics">
                     <div class="stat-item" aria-label="Current score">
@@ -536,6 +546,7 @@
                 <div class="feedback" id="feedback" aria-live="assertive" aria-atomic="true"></div>
             </section>
 
+            <!-- Game Over Screen -->
             <section class="screen game-over" id="gameOverScreen" aria-label="Game results">
                 <h2><i class="fas fa-trophy" aria-hidden="true"></i> Quiz Complete!</h2>
                 <div class="final-score" id="finalScore" aria-live="polite">0</div>
@@ -809,13 +820,13 @@
             let message = '';
             
             if (accuracy >= 90) {
-                message = 'Outstanding! You\'re a math wizard! 検';
+                message = 'Outstanding! You\'re a math wizard! 🌟';
             } else if (accuracy >= 70) {
-                message = 'Great job! Keep practicing! 聡';
+                message = 'Great job! Keep practicing! 👏';
             } else if (accuracy >= 50) {
-                message = 'Good effort! Practice makes perfect! 潮';
+                message = 'Good effort! Practice makes perfect! 💪';
             } else {
-                message = 'Keep trying! You\'ll get better! 答';
+                message = 'Keep trying! You\'ll get better! 📚';
             }
             
             document.getElementById('performanceMessage').textContent = 
