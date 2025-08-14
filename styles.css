@@ -1,6 +1,0 @@
-
-/* Minimal responsiveness fix */
-@media (max-width: 600px) {
-  body { padding: 10px; font-size: 16px; }
-  .quiz-container { width: 100% !important; }
-}
