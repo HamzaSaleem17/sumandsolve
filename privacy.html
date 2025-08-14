@@ -1,47 +1,493 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Privacy Policy — Sum & Solve</title>
-  <meta name="description" content="Read Sum & Solve's privacy policy to learn how we handle user data.">
-  <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - Sum & Solve</title>
+    <meta name="description" content="Privacy Policy for Sum & Solve - Learn how we collect, use, and protect your personal information.">
+    <link rel="canonical" href="https://sumandsolve.com/privacy.html">
+    
+    <!-- Include all meta tags, favicon links, etc. -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #667eea;
+            --secondary-color: #764ba2;
+            --text-dark: #333;
+            --text-light: #666;
+            --text-white: #fff;
+            --bg-light: #f8f9fa;
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.1);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            min-height: 100vh;
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        .navbar {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            padding: 1rem 0;
+            box-shadow: var(--shadow-md);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo i {
+            -webkit-text-fill-color: var(--primary-color);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 600;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .nav-links a.active {
+            color: var(--primary-color);
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--primary-color);
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .menu-toggle:hover {
+            background: var(--bg-light);
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 8rem 2rem 4rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .content-card {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            border-radius: 2rem;
+            padding: 3rem;
+            box-shadow: var(--shadow-xl);
+            margin-bottom: 2rem;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-weight: 800;
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .section {
+            margin-bottom: 2.5rem;
+        }
+
+        .section h2 {
+            color: var(--text-dark);
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section h2 i {
+            color: var(--primary-color);
+        }
+
+        .section h3 {
+            color: var(--text-dark);
+            font-size: 1.3rem;
+            margin: 1.5rem 0 0.75rem;
+            font-weight: 600;
+        }
+
+        .section p {
+            color: var(--text-light);
+            margin-bottom: 1rem;
+        }
+
+        .section ul {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .section li {
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+        }
+
+        .highlight-box {
+            background: var(--bg-light);
+            border-left: 4px solid var(--primary-color);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .last-updated {
+            text-align: center;
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        /* Footer */
+        .footer {
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 3rem 2rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--text-white);
+        }
+
+        .footer p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-container {
+                padding: 0 1rem;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(255, 255, 255, 0.98);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                padding: 1rem;
+                box-shadow: var(--shadow-lg);
+                gap: 0;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links a {
+                padding: 1rem;
+                border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-links a:last-child {
+                border-bottom: none;
+            }
+
+            .nav-links a::after {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .main-content {
+                padding: 6rem 1rem 2rem;
+            }
+
+            .content-card {
+                padding: 2rem 1.5rem;
+            }
+
+            .page-header h1 {
+                font-size: 2rem;
+            }
+
+            .section h2 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
 </head>
 <body>
-<div class="container main">
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-calculator"></i> Sum & Solve
+            </a>
+            <button class="menu-toggle" onclick="toggleMenu()">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="leaderboard.html">Leaderboard</a></li>
+                <li><a href="resources.html">Resources</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
 
-<header class="header">
-  <img src="favicon.svg" alt="Sum & Solve thinking cat logo" width="28" height="28">
-  <h1>Sum & Solve</h1>
-  <nav style="margin-left:auto">
-    <a href="index.html">Home</a> |
-    <a href="about.html">About</a> |
-    <a href="leaderboard.html">Leaderboard</a> |
-    <a href="resources.html">Resources</a> |
-    <a href="contact.html">Contact</a> |
-    <a href="privacy.html">Privacy</a> |
-    <a href="terms.html">Terms</a>
-  </nav>
-</header>
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="content-card">
+            <div class="page-header">
+                <h1><i class="fas fa-shield-alt"></i> Privacy Policy</h1>
+                <p>Your privacy is important to us. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our website and services.</p>
+            </div>
 
-<main class="card pad">
-  <h1>Privacy Policy</h1>
-  
-        <p>Your privacy is important to us. We do not collect personal information unless you choose to provide it via our contact form.</p>
-        <p>We use cookies only to enhance user experience and do not sell or share your data with third parties.</p>
-        
-</main>
+            <div class="section">
+                <h2><i class="fas fa-info-circle"></i> Information We Collect</h2>
+                <p>We collect information that identifies, relates to, describes, or could reasonably be linked to you when you use Sum & Solve.</p>
+                
+                <h3>Personal Information</h3>
+                <ul>
+                    <li>Name and email address when you contact us</li>
+                    <li>High scores and game statistics (stored locally in your browser)</li>
+                    <li>IP address and browser information for analytics</li>
+                </ul>
 
-<footer class="footer">
-  <div>© <span id="year"></span> Sum & Solve</div>
-  <div>
-    <a href="sitemap.xml">Sitemap</a> • 
-    <a href="robots.txt">Robots</a>
-  </div>
-</footer>
-<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+                <h3>Automatically Collected Information</h3>
+                <ul>
+                    <li>Device information and browser type</li>
+                    <li>Pages visited and time spent on our site</li>
+                    <li>Referring websites and search terms</li>
+                </ul>
+            </div>
 
-</div>
+            <div class="section">
+                <h2><i class="fas fa-cogs"></i> How We Use Your Information</h2>
+                <p>We use the information we collect to provide, maintain, and improve our services:</p>
+                
+                <ul>
+                    <li>To provide and personalize your experience on Sum & Solve</li>
+                    <li>To track your progress and high scores in the math game</li>
+                    <li>To communicate with you about your inquiries or feedback</li>
+                    <li>To analyze usage patterns and improve our website</li>
+                    <li>To send technical notices and support messages</li>
+                </ul>
+
+                <div class="highlight-box">
+                    <strong>Note:</strong> Your game progress and high scores are stored locally in your browser's localStorage. We do not transmit this information to our servers unless you choose to share it.
+                </div>
+            </div>
+
+            <div class="section">
+                <h2><i class="fas fa-share-alt"></i> Information Sharing</h2>
+                <p>We do not sell, trade, or otherwise transfer your personal information to third parties without your consent, except as described in this Privacy Policy.</p>
+                
+                <h3>Third-Party Services</h3>
+                <p>We may share information with:</p>
+                <ul>
+                    <li>Service providers who assist in operating our website</li>
+                    <li>Analytics providers (like Google Analytics) to understand usage patterns</li>
+                    <li>Social media platforms when you choose to share your scores</li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <h2><i class="fas fa-cookie-bite"></i> Cookies and Tracking</h2>
+                <p>Our website uses cookies and similar tracking technologies to enhance your experience:</p>
+                
+                <ul>
+                    <li><strong>Essential Cookies:</strong> Required for the website to function properly</li>
+                    <li><strong>Analytics Cookies:</strong> Help us understand how visitors interact with our site</li>
+                    <li><strong>Preference Cookies:</strong> Remember your settings (like sound preferences)</li>
+                </ul>
+
+                <p>You can control cookies through your browser settings, but disabling certain cookies may affect your experience on our website.</p>
+            </div>
+
+            <div class="section">
+                <h2><i class="fas fa-child"></i> Children's Privacy</h2>
+                <p>Sum & Solve is intended for users of all ages, including children. We do not knowingly collect personal information from children under 13 without parental consent. If you believe we have collected such information, please contact us immediately.</p>
+            </div>
+
+            <div class="section">
+                <h2><i class="fas fa-lock"></i> Data Security</h2>
+                <p>We implement appropriate security measures to protect your information against unauthorized access, alteration, disclosure, or destruction. These include:</p>
+                
+                <ul>
+                    <li>SSL/TLS encryption for data transmission</li>
+                    <li>Secure storage of sensitive information</li>
+                    <li>Regular security assessments and updates</li>
+                    <li>Employee training on data protection practices</li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <h2><i class="fas fa-globe"></i> International Users</h2>
+                <p>Our website is hosted in the United States. If you are accessing our website from outside the United States, please be aware that your information may be transferred to, stored, and processed in the United States in accordance with this Privacy Policy.</p>
+            </div>
+
+            <div class="section">
+                <h2><i class="fas fa-edit"></i> Changes to This Policy</h2>
+                <p>We may update this Privacy Policy from time to time. The updated version will be indicated by a revised "Last Updated" date and the updated version will be effective as soon as it is accessible.</p>
+                
+                <p>We encourage you to review this Privacy Policy periodically to stay informed about how we are protecting your information.</p>
+            </div>
+
+            <div class="section">
+                <h2><i class="fas fa-envelope"></i> Contact Us</h2>
+                <p>If you have any questions about this Privacy Policy, please contact us:</p>
+                
+                <ul>
+                    <li>Email: <a href="mailto:privacy@sumandsolve.com" style="color: var(--primary-color);">privacy@sumandsolve.com</a></li>
+                    <li>Address: 123 Education Street, Learning City, LC 12345</li>
+                </ul>
+            </div>
+
+            <div class="last-updated">
+                <p>Last Updated: December 1, 2023</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="leaderboard.html">Leaderboard</a>
+                <a href="resources.html">Resources</a>
+                <a href="contact.html">Contact</a>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms of Service</a>
+            </div>
+            <p>&copy; 2023 Sum & Solve. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+        }
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('navLinks').classList.remove('active');
+            });
+        });
+    </script>
 </body>
 </html>

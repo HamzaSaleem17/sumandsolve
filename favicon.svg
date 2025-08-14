@@ -1,21 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <defs>
-    <clipPath id="c"><circle cx="32" cy="32" r="30"/></clipPath>
-  </defs>
-  <g clip-path="url(#c)">
-    <rect width="64" height="64" rx="12" ry="12" fill="#111827"/>
-    <!-- Cat head -->
-    <path d="M18 40c0-10 7-18 14-18s14 8 14 18c0 6-6 10-14 10s-14-4-14-10z" fill="#f3f4f6"/>
-    <!-- Ears -->
-    <path d="M24 20l-8-6 2 10zM40 20l8-6-2 10z" fill="#f3f4f6"/>
-    <!-- Eyes -->
-    <circle cx="26.5" cy="36" r="2.5" fill="#111827"/>
-    <circle cx="37.5" cy="36" r="2.5" fill="#111827"/>
-    <!-- Thinking bubble -->
-    <circle cx="49" cy="14" r="6" fill="#e5e7eb"/>
-    <circle cx="43" cy="20" r="2.5" fill="#e5e7eb"/>
-    <circle cx="39" cy="23.5" r="1.5" fill="#e5e7eb"/>
-    <!-- Subtle whiskers -->
-    <path d="M12 38h10M12 41h10M42 38h10M42 41h10" stroke="#e5e7eb" stroke-width="1.2" stroke-linecap="round"/>
-  </g>
+<circle cx="32" cy="32" r="30" fill="#f9d18b"/>
+<path d="M20 15 L15 5 L25 10 Z" fill="#f9d18b"/>
+<path d="M44 15 L49 5 L39 10 Z" fill="#f9d18b"/>
+<circle cx="24" cy="28" r="4" fill="#000"/>
+<circle cx="40" cy="28" r="4" fill="#000"/>
+<path d="M24 40 Q32 48 40 40" stroke="#000" stroke-width="2" fill="none"/>
 </svg>
