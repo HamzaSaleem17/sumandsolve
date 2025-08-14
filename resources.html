@@ -16,464 +16,11 @@
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            color: #333;
-            overflow-x: hidden;
-        }
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="styles.css">
 
-        /* Navigation */
-        .navbar {
-            background: rgba(255, 255, 255, 0.95);
-            padding: 15px 0;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            backdrop-filter: blur(10px);
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 1.8em;
-            font-weight: bold;
-            color: #667eea;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 30px;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: #333;
-            font-weight: 500;
-            transition: color 0.3s ease;
-            position: relative;
-        }
-
-        .nav-links a:hover {
-            color: #667eea;
-        }
-
-        .nav-links a.active {
-            color: #667eea;
-        }
-
-        .nav-links a.active::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: #667eea;
-        }
-
-        .menu-toggle {
-            display: none;
-            background: none;
-            border: none;
-            font-size: 1.5em;
-            cursor: pointer;
-            color: #667eea;
-        }
-
-        /* Main Content */
-        .main-content {
-            padding: 120px 20px 60px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        /* Hero Section */
-        .hero-section {
-            text-align: center;
-            margin-bottom: 60px;
-        }
-
-        .hero-section h1 {
-            font-size: 3.5em;
-            color: white;
-            margin-bottom: 20px;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-        }
-
-        .hero-section p {
-            font-size: 1.3em;
-            color: rgba(255, 255, 255, 0.9);
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        /* Category Tabs */
-        .category-tabs {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-bottom: 50px;
-            flex-wrap: wrap;
-        }
-
-        .tab-btn {
-            background: rgba(255, 255, 255, 0.9);
-            border: 2px solid transparent;
-            color: #667eea;
-            padding: 12px 30px;
-            border-radius: 30px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: 500;
-            font-size: 1.1em;
-        }
-
-        .tab-btn:hover {
-            background: white;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .tab-btn.active {
-            background: #667eea;
-            color: white;
-            border-color: #667eea;
-        }
-
-        /* Resources Grid */
-        .resources-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-bottom: 60px;
-        }
-
-        .resource-card {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            padding: 40px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            transition: all 0.3s ease;
-            text-align: center;
-        }
-
-        .resource-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
-        }
-
-        .resource-icon {
-            font-size: 4em;
-            color: #667eea;
-            margin-bottom: 20px;
-        }
-
-        .resource-card h3 {
-            color: #333;
-            margin-bottom: 15px;
-            font-size: 1.5em;
-        }
-
-        .resource-card p {
-            color: #666;
-            line-height: 1.6;
-            margin-bottom: 25px;
-        }
-
-        .resource-link {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 12px 30px;
-            border-radius: 30px;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            font-weight: 500;
-            transition: all 0.3s ease;
-        }
-
-        .resource-link:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
-        }
-
-        /* Tips Section */
-        .tips-section {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            padding: 60px 40px;
-            margin-bottom: 60px;
-        }
-
-        .tips-section h2 {
-            color: #667eea;
-            font-size: 2.5em;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-
-        .tips-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-        }
-
-        .tip-card {
-            background: #f8f9fa;
-            padding: 30px;
-            border-radius: 15px;
-            border-left: 4px solid #667eea;
-            transition: all 0.3s ease;
-        }
-
-        .tip-card:hover {
-            transform: translateX(5px);
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .tip-card h4 {
-            color: #333;
-            margin-bottom: 10px;
-            font-size: 1.3em;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .tip-card p {
-            color: #666;
-            line-height: 1.6;
-        }
-
-        /* Download Section */
-        .download-section {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border-radius: 20px;
-            padding: 60px 40px;
-            text-align: center;
-            margin-bottom: 60px;
-        }
-
-        .download-section h2 {
-            font-size: 2.5em;
-            margin-bottom: 20px;
-        }
-
-        .download-section p {
-            font-size: 1.2em;
-            margin-bottom: 30px;
-            opacity: 0.9;
-        }
-
-        .download-btn {
-            background: white;
-            color: #667eea;
-            padding: 15px 40px;
-            border-radius: 50px;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 15px;
-            font-weight: bold;
-            font-size: 1.2em;
-            transition: all 0.3s ease;
-        }
-
-        .download-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-        }
-
-        /* Video Section */
-        .video-section {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            padding: 60px 40px;
-            margin-bottom: 60px;
-        }
-
-        .video-section h2 {
-            color: #667eea;
-            font-size: 2.5em;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-
-        .video-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-        }
-
-        .video-card {
-            background: #f8f9fa;
-            border-radius: 15px;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .video-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-        }
-
-        .video-thumbnail {
-            width: 100%;
-            height: 200px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 3em;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .video-thumbnail::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.3);
-        }
-
-        .video-thumbnail i {
-            position: relative;
-            z-index: 1;
-        }
-
-        .video-info {
-            padding: 20px;
-        }
-
-        .video-info h4 {
-            color: #333;
-            margin-bottom: 10px;
-        }
-
-        .video-info p {
-            color: #666;
-            font-size: 0.9em;
-        }
-
-        /* Footer */
-        .footer {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            padding: 40px 20px;
-            text-align: center;
-        }
-
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-        }
-
-        .footer-links a {
-            color: rgba(255, 255, 255, 0.8);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .footer-links a:hover {
-            color: white;
-        }
-
-        .footer p {
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 0.9em;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .hero-section h1 {
-                font-size: 2.5em;
-            }
-            
-            .menu-toggle {
-                display: block;
-            }
-            
-            .nav-links {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                right: 0;
-                background: white;
-                flex-direction: column;
-                padding: 20px;
-                box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-            }
-            
-            .nav-links.active {
-                display: flex;
-            }
-            
-            .nav-links a.active::after {
-                display: none;
-            }
-            
-            body {
-                padding-top: 120px;
-            }
-            
-            .resources-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .tips-section {
-                padding: 40px 20px;
-            }
-            
-            .download-section {
-                padding: 40px 20px;
-            }
-            
-            .video-section {
-                padding: 40px 20px;
-            }
-        }
-    </style>
 </head>
 <body>
     <!-- Navigation -->
@@ -494,7 +41,6 @@
             </ul>
         </div>
     </nav>
-
     <!-- Main Content -->
     <div class="main-content">
         <!-- Hero Section -->
@@ -502,7 +48,6 @@
             <h1><i class="fas fa-book"></i> Learning Resources</h1>
             <p>Enhance your math skills with our curated collection of learning materials and practice tools</p>
         </section>
-
         <!-- Category Tabs -->
         <div class="category-tabs">
             <button class="tab-btn active" onclick="showCategory('all')">All Resources</button>
@@ -511,7 +56,6 @@
             <button class="tab-btn" onclick="showCategory('practice')">Practice</button>
             <button class="tab-btn" onclick="showCategory('teachers')">For Teachers</button>
         </div>
-
         <!-- Resources Grid -->
         <div class="resources-grid" id="resourcesGrid">
             <div class="resource-card" data-category="basics">
@@ -524,7 +68,6 @@
                     <i class="fas fa-arrow-right"></i> Start Learning
                 </a>
             </div>
-
             <div class="resource-card" data-category="basics">
                 <div class="resource-icon">
                     <i class="fas fa-brain"></i>
@@ -535,7 +78,6 @@
                     <i class="fas fa-arrow-right"></i> Explore Strategies
                 </a>
             </div>
-
             <div class="resource-card" data-category="practice">
                 <div class="resource-icon">
                     <i class="fas fa-file-download"></i>
@@ -546,7 +88,6 @@
                     <i class="fas fa-arrow-right"></i> Download Worksheets
                 </a>
             </div>
-
             <div class="resource-card" data-category="advanced">
                 <div class="resource-icon">
                     <i class="fas fa-chart-line"></i>
@@ -557,7 +98,6 @@
                     <i class="fas fa-arrow-right"></i> Learn Advanced
                 </a>
             </div>
-
             <div class="resource-card" data-category="practice">
                 <div class="resource-icon">
                     <i class="fas fa-gamepad"></i>
@@ -568,7 +108,6 @@
                     <i class="fas fa-arrow-right"></i> Play Games
                 </a>
             </div>
-
             <div class="resource-card" data-category="teachers">
                 <div class="resource-icon">
                     <i class="fas fa-chalkboard-teacher"></i>
@@ -580,7 +119,6 @@
                 </a>
             </div>
         </div>
-
         <!-- Tips Section -->
         <section class="tips-section">
             <h2><i class="fas fa-lightbulb"></i> Pro Tips for Success</h2>
@@ -603,7 +141,6 @@
                 </div>
             </div>
         </section>
-
         <!-- Video Section -->
         <section class="video-section">
             <h2><i class="fas fa-play-circle"></i> Video Tutorials</h2>
@@ -637,7 +174,6 @@
                 </div>
             </div>
         </section>
-
         <!-- Download Section -->
         <section class="download-section">
             <h2><i class="fas fa-download"></i> Get Our Complete Learning Guide</h2>
@@ -647,7 +183,6 @@
             </a>
         </section>
     </div>
-
     <!-- Footer -->
     <footer class="footer">
         <div class="footer-content">
@@ -663,38 +198,8 @@
             <p>&copy; 2023 Sum & Solve. All rights reserved.</p>
         </div>
     </footer>
+    
 
-    <script>
-        function toggleMenu() {
-            const navLinks = document.getElementById('navLinks');
-            navLinks.classList.toggle('active');
-        }
-
-        // Show resources by category
-        function showCategory(category) {
-            // Update active button
-            document.querySelectorAll('.tab-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            event.target.classList.add('active');
-            
-            // Filter resources
-            const resources = document.querySelectorAll('.resource-card');
-            resources.forEach(resource => {
-                if (category === 'all' || resource.dataset.category === category) {
-                    resource.style.display = 'block';
-                } else {
-                    resource.style.display = 'none';
-                }
-            });
-        }
-
-        // Close mobile menu when clicking on a link
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                document.getElementById('navLinks').classList.remove('active');
-            });
-        });
-    </script>
+<script src="main.js" defer></script>
 </body>
 </html>
