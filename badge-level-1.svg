@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96">
+  <defs>
+    <linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#a7f3d0"/>
+      <stop offset="1" stop-color="#6ee7b7"/>
+    </linearGradient>
+  </defs>
+  <circle cx="48" cy="48" r="46" fill="url(#g)" stroke="#111827" stroke-width="3"/>
+  <!-- Cat medal -->
+  <path d="M30 64c0-14 10-24 18-24s18 10 18 24c0 8-8 14-18 14s-18-6-18-14z" fill="#fef3c7" stroke="#111827" stroke-width="2"/>
+  <path d="M38 38l-8-6 2 10zM58 38l8-6-2 10z" fill="#fef3c7" stroke="#111827" stroke-width="1"/>
+  <circle cx="41" cy="58" r="3" fill="#111827"/><circle cx="55" cy="58" r="3" fill="#111827"/>
+  <text x="48" y="86" text-anchor="middle" font-family="ui-sans-serif,system-ui" font-size="20" font-weight="700" fill="#111827">L1</text>
+</svg>
