@@ -35,10 +35,10 @@
     <nav>
         <div class="container">
             <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#how-it-works">How It Works</a></li>
-                <li><a href="#levels">Levels</a></li>
-                <li><a href="#badges">Badges</a></li>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="resources.html">Resources</a></li>
+                <li><a href="terms.html">Terms</a></li>
             </ul>
         </div>
     </nav>
@@ -58,6 +58,7 @@
                     <div class="score-display">Score: <span id="score">0</span></div>
                     <div class="level-display">Level: <span id="level">1</span></div>
                     <div class="progress-display">Progress: <span id="progress">0/20</span></div>
+                    <div class="timer-display">Time: <span id="timer">30</span>s</div>
                 </div>
 
                 <div class="question-container">
@@ -70,6 +71,10 @@
                     <button class="answer-button" data-answer="1">1</button>
                     <button class="answer-button" data-answer="2">2</button>
                     <button class="answer-button" data-answer="3">3</button>
+                </div>
+
+                <div class="game-controls">
+                    <button id="reset-btn" class="btn-secondary">Reset Game</button>
                 </div>
 
                 <div class="badges-container">
