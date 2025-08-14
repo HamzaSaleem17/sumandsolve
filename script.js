@@ -47,93 +47,95 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Generate a new question based on current level
-    function generateQuestion() {
-        // Reset feedback and button states
-        feedbackDisplay.classList.add('hidden');
-        answerButtons.forEach(button => {
-            button.classList.remove('correct', 'incorrect');
-            button.disabled = false;
-        });
+// Generate a new question based on current level
+function generateQuestion() {
+    // Reset feedback and button states
+    feedbackDisplay.classList.add('hidden');
+    answerButtons.forEach(button => {
+        button.classList.remove('correct', 'incorrect');
+        button.disabled = false;
+    });
 
-        // Generate question based on level
-        let question, answer;
-        
-        switch(currentLevel) {
-            case 1: // Single digit addition
-                const num1 = Math.floor(Math.random() * 10);
-                const num2 = Math.floor(Math.random() * 10);
-                question = `${num1} + ${num2}`;
-                answer = num1 + num2;
-                break;
+    // Generate question based on level
+    let question, answer;
+    
+    switch(currentLevel) {
+        case 1: // Single digit addition (avoiding 0)
+            const num1 = Math.floor(Math.random() * 9) + 1; // 1-9
+            const num2 = Math.floor(Math.random() * 9) + 1; // 1-9
+            question = `${num1} + ${num2}`;
+            answer = num1 + num2;
+            break;
+            
+        case 2: // Two digit addition
+            const num3 = Math.floor(Math.random() * 90) + 10;
+            const num4 = Math.floor(Math.random() * 90) + 10;
+            question = `${num3} + ${num4}`;
+            answer = num3 + num4;
+            break;
+            
+        case 3: // Mix of level 1 and 2
+            if (Math.random() > 0.5) {
+                // Single digit (avoiding 0)
+                const num5 = Math.floor(Math.random() * 9) + 1; // 1-9
+                const num6 = Math.floor(Math.random() * 9) + 1; // 1-9
+                question = `${num5} + ${num6}`;
+                answer = num5 + num6;
+            } else {
+                // Two digit
+                const num7 = Math.floor(Math.random() * 90) + 10;
+                const num8 = Math.floor(Math.random() * 90) + 10;
+                question = `${num7} + ${num8}`;
+                answer = num7 + num8;
+            }
+            break;
+            
+        case 4: // Two digit addition of three numbers
+            const num9 = Math.floor(Math.random() * 90) + 10;
+            const num10 = Math.floor(Math.random() * 90) + 10;
+            const num11 = Math.floor(Math.random() * 90) + 10;
+            question = `${num9} + ${num10} + ${num11}`;
+            answer = num9 + num10 + num11;
+            break;
+            
+        default: // For higher levels, increase complexity
+            const complexity = Math.min(currentLevel, 10);
+            const digitCount = Math.ceil(complexity / 2);
+            const numCount = Math.min(Math.ceil(complexity / 3), 5);
+            
+            let numbers = [];
+            let total = 0;
+            let questionText = "";
+            
+            for (let i = 0; i < numCount; i++) {
+                // Ensure minimum is at least 1 (avoid 0)
+                const min = Math.max(1, Math.pow(10, digitCount - 1));
+                const max = Math.pow(10, digitCount) - 1;
+                const num = Math.floor(Math.random() * (max - min + 1)) + min;
+                numbers.push(num);
+                total += num;
                 
-            case 2: // Two digit addition
-                const num3 = Math.floor(Math.random() * 90) + 10;
-                const num4 = Math.floor(Math.random() * 90) + 10;
-                question = `${num3} + ${num4}`;
-                answer = num3 + num4;
-                break;
-                
-            case 3: // Mix of level 1 and 2
-                if (Math.random() > 0.5) {
-                    // Single digit
-                    const num5 = Math.floor(Math.random() * 10);
-                    const num6 = Math.floor(Math.random() * 10);
-                    question = `${num5} + ${num6}`;
-                    answer = num5 + num6;
-                } else {
-                    // Two digit
-                    const num7 = Math.floor(Math.random() * 90) + 10;
-                    const num8 = Math.floor(Math.random() * 90) + 10;
-                    question = `${num7} + ${num8}`;
-                    answer = num7 + num8;
-                }
-                break;
-                
-            case 4: // Two digit addition of three numbers
-                const num9 = Math.floor(Math.random() * 90) + 10;
-                const num10 = Math.floor(Math.random() * 90) + 10;
-                const num11 = Math.floor(Math.random() * 90) + 10;
-                question = `${num9} + ${num10} + ${num11}`;
-                answer = num9 + num10 + num11;
-                break;
-                
-            default: // For higher levels, increase complexity
-                const complexity = Math.min(currentLevel, 10);
-                const digitCount = Math.ceil(complexity / 2);
-                const numCount = Math.min(Math.ceil(complexity / 3), 5);
-                
-                let numbers = [];
-                let total = 0;
-                let questionText = "";
-                
-                for (let i = 0; i < numCount; i++) {
-                    const min = Math.pow(10, digitCount - 1);
-                    const max = Math.pow(10, digitCount) - 1;
-                    const num = Math.floor(Math.random() * (max - min + 1)) + min;
-                    numbers.push(num);
-                    total += num;
-                    
-                    if (i > 0) questionText += " + ";
-                    questionText += num;
-                }
-                
-                question = questionText;
-                answer = total;
-                break;
-        }
-        
-        currentQuestion = { question, answer };
-        questionDisplay.textContent = question;
-        
-        // Generate answer options
-        const options = generateAnswerOptions(answer);
-        answerButtons.forEach((button, index) => {
-            button.textContent = options[index];
-            button.dataset.answer = options[index];
-        });
-        
-        isAnswering = false;
+                if (i > 0) questionText += " + ";
+                questionText += num;
+            }
+            
+            question = questionText;
+            answer = total;
+            break;
     }
+    
+    currentQuestion = { question, answer };
+    questionDisplay.textContent = question;
+    
+    // Generate answer options
+    const options = generateAnswerOptions(answer);
+    answerButtons.forEach((button, index) => {
+        button.textContent = options[index];
+        button.dataset.answer = options[index];
+    });
+    
+    isAnswering = false;
+}
 
     // Generate answer options with the correct answer and random distractors
     function generateAnswerOptions(correctAnswer) {
@@ -261,4 +263,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initialize the game
     initGame();
+
 });
