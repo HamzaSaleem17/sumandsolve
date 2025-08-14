@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /private/
+Disallow: /tmp/
 
-Sitemap: https://www.sumandsolve.com/sitemap.xml
+Sitemap: https://sumandsolve.com/sitemap.xml
