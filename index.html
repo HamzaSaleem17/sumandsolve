@@ -7,134 +7,1775 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     
     <!-- SEO Meta Tags -->
-    <title>Sum & Solve - Adaptive Math Quiz Game for All Ages</title>
-    <meta name="description" content="Master addition with Sum & Solve, a fun, adaptive, and level-based math quiz game. Earn cat badges and compete on the leaderboard! Perfect for students and adults.">
-    <meta name="keywords" content="math quiz, addition game, math practice, educational game, brain training, math skills, adaptive learning, free math game, cat badges, math levels">
+    <title>Sum & Solve - Free Online Math Addition Quiz Game</title>
+    <meta name="description" content="Test your addition skills with Sum & Solve - an adaptive math quiz game that adjusts difficulty based on your performance. Perfect for students and math enthusiasts!">
+    <meta name="keywords" content="math quiz, addition game, math practice, educational game, brain training, math skills, adaptive learning, free math game">
     <meta name="author" content="Sum & Solve Team">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://sumandsolve.com">
     
     <!-- Open Graph Meta Tags -->
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Sum & Solve - Adaptive Math Quiz Game for All Ages">
+    <meta property="og:title" content="Sum & Solve - Free Online Math Addition Quiz Game">
     <meta property="og:description" content="Challenge your mind with our adaptive math quiz! Perfect your addition skills with difficulty that adjusts to your level.">
     <meta property="og:url" content="https://sumandsolve.com">
     <meta property="og:site_name" content="Sum & Solve">
-    <meta property="og:image" content="https://placehold.co/1200x630/667eea/ffffff?text=Sum+%26+Solve">
-    <meta property="og:image:alt" content="A cat logo with the text 'Sum & Solve' on a colorful background.">
-
+    <meta property="og:image" content="https://sumandsolve.com/og-image.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:locale" content="en_US">
+    
     <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Sum & Solve - Adaptive Math Quiz Game for All Ages">
-    <meta name="twitter:description" content="Master addition with our fun, adaptive, and level-based math quiz game.">
-    <meta name="twitter:image" content="https://placehold.co/1200x675/667eea/ffffff?text=Sum+%26+Solve">
-
-    <!-- Favicon -->
-    <!-- Cat SVG as favicon.ico -->
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath fill='%23667eea' d='M50,5A45,45,0,1,0,95,50,45,45,0,0,0,50,5ZM30,25a5,5,0,0,1,10,0V40a5,5,0,0,1-10,0V25Zm40,0a5,5,0,0,1,10,0V40a5,5,0,0,1-10,0V25Zm-3,50a3,3,0,0,1-6,0c0-10,12-10,12,0a3,3,0,0,1-6,0ZM50,60a10,10,0,1,1-10-10A10,10,0,0,1,50,60Z'/%3E%3C/svg%3E">
-    <link rel="apple-touch-icon" sizes="180x180" href="https://placehold.co/180x180/667eea/ffffff?text=C">
+    <meta name="twitter:site" content="@SumAndSolve">
+    <meta name="twitter:creator" content="@SumAndSolve">
+    <meta name="twitter:title" content="Sum & Solve - Free Online Math Addition Quiz Game">
+    <meta name="twitter:description" content="Test your addition skills with our adaptive math quiz game. Difficulty adjusts to your performance!">
+    <meta name="twitter:image" content="https://sumandsolve.com/twitter-image.jpg">
     
+    <!-- Favicon and Icons -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    
+    <!-- Preconnect for Performance -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    
+    <!-- Stylesheets -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="styles.css">
     
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #667eea;
+            --secondary-color: #764ba2;
+            --accent-color: #4caf50;
+            --danger-color: #f44336;
+            --warning-color: #ff9800;
+            --text-dark: #333;
+            --text-light: #666;
+            --text-white: #fff;
+            --bg-light: #f8f9fa;
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.1);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
+            --shadow-xl: 0 20px 25px rgba(0,0,0,0.1);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            min-height: 100vh;
+            color: var(--text-dark);
+            overflow-x: hidden;
+            line-height: 1.6;
+            position: relative;
+        }
+
+        /* Mathematical Background */
+        .math-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+            opacity: 0.3;
+        }
+
+        .math-graph {
+            position: absolute;
+            stroke: rgba(255, 255, 255, 0.6);
+            stroke-width: 2;
+            fill: none;
+            filter: drop-shadow(0 0 10px rgba(102, 126, 234, 0.3));
+        }
+
+        .graph-1 {
+            top: 10%;
+            left: 5%;
+            width: 30%;
+            height: 30%;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        .graph-2 {
+            top: 50%;
+            right: 5%;
+            width: 25%;
+            height: 25%;
+            animation: float 25s ease-in-out infinite reverse;
+        }
+
+        .graph-3 {
+            bottom: 10%;
+            left: 15%;
+            width: 35%;
+            height: 35%;
+            animation: float 30s ease-in-out infinite;
+        }
+
+        .graph-4 {
+            top: 20%;
+            right: 20%;
+            width: 20%;
+            height: 20%;
+            animation: rotate 40s linear infinite;
+        }
+
+        .graph-5 {
+            bottom: 30%;
+            right: 30%;
+            width: 15%;
+            height: 15%;
+            animation: rotate 35s linear infinite reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Enhanced Navigation */
+        .navbar {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            padding: 1rem 0;
+            box-shadow: var(--shadow-md);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            padding: 0.5rem 0;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .logo i {
+            -webkit-text-fill-color: var(--primary-color);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .nav-links a.active {
+            color: var(--primary-color);
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--primary-color);
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .menu-toggle:hover {
+            background: var(--bg-light);
+        }
+
+        /* Enhanced Hero Section */
+        .hero {
+            padding: 8rem 2rem 4rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff20" fill-opacity="1" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,133.3C960,128,1056,96,1152,90.7C1248,85,1344,107,1392,117.3L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') no-repeat bottom;
+            background-size: cover;
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            color: var(--text-white);
+            padding: 0.5rem 1.5rem;
+            border-radius: 2rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            animation: fadeInDown 0.8s ease;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            color: var(--text-white);
+            margin-bottom: 1.5rem;
+            font-weight: 800;
+            line-height: 1.2;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            animation: fadeInDown 1s ease;
+        }
+
+        .hero p {
+            font-size: clamp(1.1rem, 2vw, 1.4rem);
+            color: rgba(255, 255, 255, 0.95);
+            margin-bottom: 2rem;
+            font-weight: 400;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        .cta-button {
+            background: var(--text-white);
+            color: var(--primary-color);
+            border: none;
+            padding: 1rem 2.5rem;
+            font-size: 1.1rem;
+            border-radius: 3rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 700;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .cta-button-secondary {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            color: var(--text-white);
+            border: 2px solid var(--text-white);
+        }
+
+        .cta-button-secondary:hover {
+            background: var(--text-white);
+            color: var(--primary-color);
+        }
+
+        /* Stats Section */
+        .stats-section {
+            padding: 4rem 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .stats-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 1rem;
+            text-align: center;
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--text-light);
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Game Container */
+        .game-section {
+            padding: 4rem 2rem;
+        }
+
+        .game-container {
+            max-width: 700px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .game-card {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            border-radius: 2rem;
+            box-shadow: var(--shadow-xl);
+            padding: 3rem;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .game-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(102, 126, 234, 0.1) 0%, transparent 70%);
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .game-area {
+            position: relative;
+            z-index: 1;
+        }
+
+        .screen {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .screen.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Settings Panel */
+        .settings-panel {
+            background: var(--bg-light);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.06);
+        }
+
+        .settings-group {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .settings-group label {
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .settings-group input[type="checkbox"] {
+            width: 1.2rem;
+            height: 1.2rem;
+            cursor: pointer;
+            accent-color: var(--primary-color);
+        }
+
+        .settings-group select {
+            padding: 0.5rem 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 0.5rem;
+            background: white;
+            cursor: pointer;
+            font-weight: 500;
+            color: var(--text-dark);
+        }
+
+        /* Start Screen */
+        .start-screen h2 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            font-size: 2.5rem;
+            text-align: center;
+            font-weight: 800;
+        }
+
+        .start-screen p {
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+            font-size: 1.1rem;
+            text-align: center;
+        }
+
+        .features-list {
+            text-align: left;
+            margin: 2rem 0;
+            padding-left: 1rem;
+        }
+
+        .features-list li {
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .features-list i {
+            color: var(--accent-color);
+            font-size: 1.2rem;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: var(--text-white);
+            border: none;
+            padding: 1rem 2.5rem;
+            font-size: 1.2rem;
+            border-radius: 3rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-md);
+            display: inline-block;
+            text-decoration: none;
+            font-weight: 700;
+            margin: 0.5rem;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn:active {
+            transform: translateY(-1px);
+        }
+
+        .btn-large {
+            padding: 1.2rem 3rem;
+            font-size: 1.3rem;
+        }
+
+        /* Game Screen */
+        .stats-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            gap: 1rem;
+        }
+
+        .stat-box {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 1.5rem;
+            border-radius: 1rem;
+            box-shadow: var(--shadow-sm);
+            flex: 1;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .stat-box:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary-color);
+        }
+
+        .difficulty-indicator {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: var(--text-white);
+            border-radius: 2rem;
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            box-shadow: var(--shadow-md);
+        }
+
+        .timer-container {
+            width: 100%;
+            height: 1rem;
+            background: #e0e0e0;
+            border-radius: 0.5rem;
+            margin: 1.5rem 0;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .timer-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-color), #8bc34a);
+            border-radius: 0.5rem;
+            transition: width 0.1s linear;
+            position: relative;
+        }
+
+        .timer-bar.warning {
+            background: linear-gradient(90deg, var(--warning-color), #ffc107);
+        }
+
+        .timer-bar.danger {
+            background: linear-gradient(90deg, var(--danger-color), #e91e63);
+        }
+
+        .question {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            color: var(--text-dark);
+            margin: 2rem 0;
+            font-weight: 300;
+            letter-spacing: 0.05em;
+            text-align: center;
+        }
+
+        .answers {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .answer-btn {
+            background: white;
+            border: 3px solid #e0e0e0;
+            padding: 2rem;
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            border-radius: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            font-weight: 700;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .answer-btn:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .answer-btn.correct {
+            background: var(--accent-color);
+            color: var(--text-white);
+            border-color: var(--accent-color);
+            animation: correctPulse 0.6s ease;
+        }
+
+        .answer-btn.incorrect {
+            background: var(--danger-color);
+            color: var(--text-white);
+            border-color: var(--danger-color);
+            animation: shake 0.5s ease;
+        }
+
+        @keyframes correctPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+
+        .feedback {
+            margin: 1.5rem 0;
+            font-size: 1.3rem;
+            height: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+
+        .feedback.correct {
+            color: var(--accent-color);
+        }
+
+        .feedback.incorrect {
+            color: var(--danger-color);
+        }
+
+        /* Game Over Screen */
+        .game-over h2 {
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-weight: 800;
+        }
+
+        .final-score {
+            font-size: 4rem;
+            color: var(--secondary-color);
+            margin: 1.5rem 0;
+            font-weight: 800;
+            text-align: center;
+        }
+
+        .performance-message {
+            font-size: 1.3rem;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .high-scores {
+            background: var(--bg-light);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.06);
+        }
+
+        .high-scores h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            text-align: center;
+            font-weight: 700;
+        }
+
+        .high-score-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .high-score-item:last-child {
+            border-bottom: none;
+        }
+
+        .share-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .share-btn {
+            background: var(--primary-color);
+            color: var(--text-white);
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 2rem;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 600;
+        }
+
+        .share-btn:hover {
+            background: var(--secondary-color);
+            transform: translateY(-3px);
+        }
+
+        /* Animations */
+        .confetti {
+            position: absolute;
+            width: 1rem;
+            height: 1rem;
+            background: var(--primary-color);
+            animation: confetti-fall 3s ease-out forwards;
+        }
+
+        @keyframes confetti-fall {
+            0% {
+                transform: translateY(-100vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        .particle {
+            position: absolute;
+            width: 0.5rem;
+            height: 0.5rem;
+            background: var(--primary-color);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: particle-float 1s ease-out forwards;
+        }
+
+        @keyframes particle-float {
+            0% {
+                transform: translate(0, 0) scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(var(--x), var(--y)) scale(0);
+                opacity: 0;
+            }
+        }
+
+        /* Loading */
+        .loading {
+            text-align: center;
+            padding: 1rem;
+            color: var(--text-light);
+        }
+
+        .loading i {
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Footer */
+        .footer {
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 3rem 2rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: var(--text-white);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--text-white);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            width: 2.5rem;
+            height: 2.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-bottom p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+
+        /* Enhanced Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-container {
+                padding: 0 1rem;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(255, 255, 255, 0.98);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                padding: 1rem;
+                box-shadow: var(--shadow-lg);
+                gap: 0;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links a {
+                padding: 1rem;
+                border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-links a:last-child {
+                border-bottom: none;
+            }
+
+            .nav-links a::after {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .hero {
+                padding: 6rem 1rem 3rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .cta-button {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+
+            .game-card {
+                padding: 2rem 1.5rem;
+            }
+
+            .question {
+                font-size: 2.5rem;
+            }
+
+            .answers {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .answer-btn {
+                padding: 1.5rem;
+            }
+
+            .stats-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .stat-box {
+                width: 100%;
+            }
+
+            .settings-panel {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .final-score {
+                font-size: 3rem;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .social-links {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .game-card {
+                margin: 0 1rem;
+            }
+        }
+    </style>
 </head>
 <body>
-    <!-- Header -->
-    <header class="header">
-        <div class="nav-container">
-            <a href="index.html" class="logo">Sum & Solve</a>
-            <div class="menu-toggle" onclick="toggleMenu()">
-                <i class="fas fa-bars"></i>
-            </div>
-            <nav id="navLinks" class="nav-links">
-                <a href="index.html" class="active">Home</a>
-                <a href="about.html">About</a>
-                <a href="leaderboard.html">Leaderboard</a>
-                <a href="resources.html">Resources</a>
-                <a href="contact.html">Contact</a>
-            </nav>
-        </div>
-    </header>
+    <!-- Mathematical Background -->
+    <div class="math-background">
+        <!-- Sine Wave Graph -->
+        <svg class="math-graph graph-1" viewBox="0 0 200 100">
+            <path d="M0,50 Q25,20 50,50 T100,50 T150,50 T200,50" />
+            <circle cx="0" cy="50" r="3" fill="rgba(255,255,255,0.8)" />
+            <circle cx="50" cy="50" r="3" fill="rgba(255,255,255,0.8)" />
+            <circle cx="100" cy="50" r="3" fill="rgba(255,255,255,0.8)" />
+            <circle cx="150" cy="50" r="3" fill="rgba(255,255,255,0.8)" />
+            <circle cx="200" cy="50" r="3" fill="rgba(255,255,255,0.8)" />
+        </svg>
 
-    <!-- Main Content -->
-    <div class="container">
-        <!-- Hero Section -->
-        <section class="hero-section">
-            <h1>Master Your Math Skills</h1>
-            <p class="subtitle">The adaptive quiz game that makes addition fun and challenging. Can you reach the highest level?</p>
-            <a href="#game" class="btn cta-button">Start Playing Now</a>
-        </section>
+        <!-- Parabola Graph -->
+        <svg class="math-graph graph-2" viewBox="0 0 200 100">
+            <path d="M0,80 Q50,20 100,30 Q150,40 200,10" />
+            <circle cx="0" cy="80" r="3" fill="rgba(255,255,255,0.8)" />
+            <circle cx="50" cy="20" r="3" fill="rgba(255,255,255,0.8)" />
+            <circle cx="100" cy="30" r="3" fill="rgba(255,255,255,0.8)" />
+            <circle cx="150" cy="40" r="3" fill="rgba(255,255,255,0.8)" />
+            <circle cx="200" cy="10" r="3" fill="rgba(255,255,255,0.8)" />
+        </svg>
 
-        <!-- Game Section -->
-        <section id="game" class="game-section">
-            <h2 class="section-title">The Game</h2>
-            <div class="stats-container">
-                <div class="stat-box">
-                    <span class="stat-label">Level:</span>
-                    <span id="level-display" class="stat-value">1</span>
-                    <div id="badge-container" class="badge-container">
-                        <!-- Badges will be displayed here as SVGs -->
-                    </div>
-                </div>
-                <div class="stat-box">
-                    <span class="stat-label">Score:</span>
-                    <span id="score-display" class="stat-value">0</span>
-                </div>
-                <div class="stat-box">
-                    <span class="stat-label">Questions:</span>
-                    <span id="questions-display" class="stat-value">0/20</span>
-                </div>
-            </div>
-            <div class="game-card">
-                <div id="quiz-area">
-                    <div id="question-box" class="question-box">
-                        <span id="question-text"></span>
-                        <input type="number" id="answer-input" placeholder="Your Answer">
-                    </div>
-                    <button id="submit-btn" class="btn submit-btn">Submit</button>
-                    <div id="message-box" class="message-box"></div>
-                </div>
-                <div id="start-screen" class="start-screen">
-                    <p>Welcome to Sum & Solve! Click below to begin your math journey.</p>
-                    <button id="start-btn" class="btn">Start Game</button>
-                </div>
-                <div id="game-over-screen" class="game-over-screen">
-                    <h3>Game Over!</h3>
-                    <p>Your Final Score: <span id="final-score">0</span></p>
-                    <p>You reached Level: <span id="final-level">1</span></p>
-                    <button id="restart-btn" class="btn">Play Again</button>
-                    <div class="share-buttons">
-                        <p>Share your achievement!</p>
-                        <button class="share-btn twitter-share" onclick="shareOnTwitter()"><i class="fab fa-twitter"></i> Twitter</button>
-                        <button class="share-btn facebook-share" onclick="shareOnFacebook()"><i class="fab fa-facebook"></i> Facebook</button>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <!-- Exponential Curve -->
+        <svg class="math-graph graph-3" viewBox="0 0 200 100">
+            <path d="M0,90 Q30,85 60,70 Q90,50 120,20 Q150,5 180,2 T200,1" />
+            <circle cx="0" cy="90" r="3" fill="rgba(255,255,255,0.8)" />
+            <circle cx="60" cy="70" r="3" fill="rgba(255,255,255,0.8)" />
+            <circle cx="120" cy="20" r="3" fill="rgba(255,255,255,0.8)" />
+            <circle cx="200" cy="1" r="3" fill="rgba(255,255,255,0.8)" />
+        </svg>
+
+        <!-- Circle with Tangent -->
+        <svg class="math-graph graph-4" viewBox="0 0 200 200">
+            <circle cx="100" cy="100" r="60" />
+            <line x1="160" y1="100" x2="180" y2="100" />
+            <line x1="160" y1="100" x2="160" y2="80" />
+            <circle cx="100" cy="100" r="3" fill="rgba(255,255,255,0.8)" />
+            <circle cx="160" cy="100" r="3" fill="rgba(255,255,255,0.8)" />
+        </svg>
+
+        <!-- Spiral -->
+        <svg class="math-graph graph-5" viewBox="0 0 200 200">
+            <path d="M100,100 m0,0 a30,30 0 0,1 21.21,-21.21 a25,25 0 0,1 17.68,-17.68 a20,20 0 0,1 14.14,-14.14 a15,15 0 0,1 10.61,-10.61" />
+            <circle cx="100" cy="100" r="3" fill="rgba(255,255,255,0.8)" />
+            <circle cx="121.21" cy="78.79" r="3" fill="rgba(255,255,255,0.8)" />
+            <circle cx="138.89" cy="61.11" r="3" fill="rgba(255,255,255,0.8)" />
+            <circle cx="153.03" cy="46.97" r="3" fill="rgba(255,255,255,0.8)" />
+            <circle cx="163.64" cy="36.36" r="3" fill="rgba(255,255,255,0.8)" />
+        </svg>
     </div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-calculator"></i> Sum & Solve
+            </a>
+            <button class="menu-toggle" onclick="toggleMenu()">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="leaderboard.html">Leaderboard</a></li>
+                <li><a href="resources.html">Resources</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">
+                <i class="fas fa-star"></i> #1 Math Learning Platform
+            </div>
+            <h1>Master Addition in Minutes</h1>
+            <p>Challenge your mind with our adaptive math quiz that adjusts to your skill level. Join over 50,000 learners worldwide!</p>
+            <div class="hero-buttons">
+                <a href="#game" class="cta-button">
+                    <i class="fas fa-play"></i> Start Playing Now
+                </a>
+                <a href="#features" class="cta-button cta-button-secondary">
+                    <i class="fas fa-info-circle"></i> Learn More
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number">50K+</div>
+                <div class="stat-label">Active Learners</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">2M+</div>
+                <div class="stat-label">Problems Solved</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">95%</div>
+                <div class="stat-label">Success Rate</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">4.8★</div>
+                <div class="stat-label">User Rating</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Game Section -->
+    <section id="game" class="game-section">
+        <div class="game-container">
+            <div class="game-card">
+                <div class="game-area">
+                    <!-- Start Screen -->
+                    <div class="screen start-screen active" id="startScreen">
+                        <h2>Ready to Challenge Your Mind?</h2>
+                        <p>Test your addition skills in this adaptive math quiz. The difficulty adjusts based on your performance. Answer quickly before time runs out!</p>
+                        
+                        <div class="settings-panel">
+                            <div class="settings-group">
+                                <label>
+                                    <input type="checkbox" id="soundToggle" checked> 
+                                    Sound Effects
+                                </label>
+                            </div>
+                            <div class="settings-group">
+                                <label>
+                                    <input type="checkbox" id="animationToggle" checked> 
+                                    Animations
+                                </label>
+                            </div>
+                            <div class="settings-group">
+                                <label>Difficulty:</label>
+                                <select id="difficultySelect">
+                                    <option value="auto">Auto</option>
+                                    <option value="1">Beginner</option>
+                                    <option value="2">Easy</option>
+                                    <option value="3">Medium</option>
+                                    <option value="4">Hard</option>
+                                    <option value="5">Expert</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <ul class="features-list">
+                            <li><i class="fas fa-check-circle"></i> Adaptive difficulty that matches your skill level</li>
+                            <li><i class="fas fa-clock"></i> Timed challenges to improve speed</li>
+                            <li><i class="fas fa-trophy"></i> Score points and track your progress</li>
+                            <li><i class="fas fa-brain"></i> Perfect for students and math enthusiasts</li>
+                        </ul>
+                        
+                        <div style="text-align: center;">
+                            <button class="btn btn-large" onclick="startGame()">
+                                <i class="fas fa-play"></i> Start Quiz
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Game Screen -->
+                    <div class="screen game-screen" id="gameScreen">
+                        <div class="stats-container">
+                            <div class="stat-box">
+                                <div class="stat-label">Score</div>
+                                <div class="stat-value" id="score">0</div>
+                            </div>
+                            <div class="stat-box">
+                                <div class="stat-label">Level</div>
+                                <div class="stat-value" id="level">1</div>
+                            </div>
+                        </div>
+                        
+                        <div style="text-align: center;">
+                            <div class="difficulty-indicator" id="difficultyIndicator">Beginner</div>
+                        </div>
+                        
+                        <div class="timer-container" role="timer" aria-label="Time remaining">
+                            <div class="timer-bar" id="timerBar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        
+                        <div class="question" id="question" aria-live="polite">5 + 3 = ?</div>
+                        
+                        <div class="answers" id="answers" role="group" aria-label="Answer choices">
+                            <button class="answer-btn" onclick="checkAnswer(this)" aria-label="Answer option 1">8</button>
+                            <button class="answer-btn" onclick="checkAnswer(this)" aria-label="Answer option 2">7</button>
+                            <button class="answer-btn" onclick="checkAnswer(this)" aria-label="Answer option 3">9</button>
+                            <button class="answer-btn" onclick="checkAnswer(this)" aria-label="Answer option 4">6</button>
+                        </div>
+                        
+                        <div class="feedback" id="feedback" aria-live="assertive" aria-atomic="true"></div>
+                    </div>
+
+                    <!-- Game Over Screen -->
+                    <div class="screen game-over" id="gameOverScreen">
+                        <h2><i class="fas fa-trophy"></i> Quiz Complete!</h2>
+                        <div class="final-score" id="finalScore" aria-live="polite">0</div>
+                        <div class="performance-message" id="performanceMessage" aria-live="polite">Great job!</div>
+                        
+                        <div class="high-scores" id="highScoresSection">
+                            <h3>Your High Scores</h3>
+                            <div id="highScoresList"></div>
+                        </div>
+                        
+                        <div class="share-buttons" aria-label="Share your score">
+                            <button class="share-btn" onclick="shareOnTwitter()" aria-label="Share on Twitter">
+                                <i class="fab fa-twitter"></i> Twitter
+                            </button>
+                            <button class="share-btn" onclick="shareOnFacebook()" aria-label="Share on Facebook">
+                                <i class="fab fa-facebook-f"></i> Facebook
+                            </button>
+                        </div>
+                        
+                        <div style="text-align: center;">
+                            <button class="btn" onclick="resetGame()" aria-label="Play the quiz again">
+                                <i class="fas fa-redo"></i> Play Again
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Footer -->
     <footer class="footer">
         <div class="footer-content">
-            <div class="footer-links">
-                <a href="index.html">Home</a>
-                <a href="about.html">About</a>
-                <a href="leaderboard.html">Leaderboard</a>
-                <a href="resources.html">Resources</a>
-                <a href="contact.html">Contact</a>
-                <a href="privacy.html">Privacy Policy</a>
-                <a href="terms.html">Terms of Service</a>
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3>Sum & Solve</h3>
+                    <p>Master addition skills with our adaptive learning platform. Perfect for students and math enthusiasts of all ages.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="leaderboard.html">Leaderboard</a></li>
+                        <li><a href="resources.html">Resources</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Support</h3>
+                    <ul class="footer-links">
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="terms.html">Terms of Service</a></li>
+                        <li><a href="faq.html">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Newsletter</h3>
+                    <p>Subscribe to get tips and updates on improving your math skills.</p>
+                    <form style="margin-top: 1rem;">
+                        <input type="email" placeholder="Your email" style="width: 100%; padding: 0.75rem; border: none; border-radius: 0.5rem; margin-bottom: 0.5rem;">
+                        <button type="submit" class="btn" style="width: 100%;">Subscribe</button>
+                    </form>
+                </div>
             </div>
-            <p>&copy; 2023 Sum & Solve. All rights reserved.</p>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Sum & Solve. All rights reserved.</p>
+            </div>
         </div>
     </footer>
 
-    <script src="game.js"></script>
     <script>
+        // Sound effects
+        const sounds = {
+            correct: new Audio('data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmwhBSuBzvLZiTYIG2m98OScTgwOUarm7blmFgU7k9n1unEiBC13yO/eizEIHWq+8+OWT'),
+            incorrect: new Audio('data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmwhBSuBzvLZiTYIG2m98OScTgwOUarm7blmFgU7k9n1unEiBC13yO/eizEIHWq+8+OWT'),
+            levelUp: new Audio('data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmwhBSuBzvLZiTYIG2m98OScTgwOUarm7blmFgU7k9n1unEiBC13yO/eizEIHWq+8+OWT')
+        };
+
+        // Game variables
+        let score = 0;
+        let level = 1;
+        let difficulty = 1;
+        let currentQuestion = {};
+        let totalQuestions = 0;
+        let correctAnswers = 0;
+        let gameActive = true;
+        let isProcessing = false;
+        let timerInterval;
+        let timeLeft;
+        let totalTime;
+
+        const difficultySettings = {
+            1: { min: 1, max: 10, name: 'Beginner', points: 10, time: 8 },
+            2: { min: 5, max: 20, name: 'Easy', points: 15, time: 10 },
+            3: { min: 10, max: 50, name: 'Medium', points: 20, time: 12 },
+            4: { min: 20, max: 100, name: 'Hard', points: 25, time: 15 },
+            5: { min: 50, max: 200, name: 'Expert', points: 30, time: 18 }
+        };
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Toggle mobile menu
+        function toggleMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+        }
+
+        // Play sound effect
+        function playSound(type) {
+            if (document.getElementById('soundToggle').checked && sounds[type]) {
+                sounds[type].currentTime = 0;
+                sounds[type].play().catch(() => {});
+            }
+        }
+
+        // Start game
+        function startGame() {
+            document.getElementById('startScreen').classList.remove('active');
+            document.getElementById('gameScreen').classList.add('active');
+            resetStats();
+            
+            // Set initial difficulty
+            const difficultySelect = document.getElementById('difficultySelect');
+            if (difficultySelect.value !== 'auto') {
+                difficulty = parseInt(difficultySelect.value);
+                level = difficulty;
+            }
+            
+            generateQuestion();
+        }
+
+        // Reset stats
+        function resetStats() {
+            score = 0;
+            level = 1;
+            difficulty = 1;
+            totalQuestions = 0;
+            correctAnswers = 0;
+            gameActive = true;
+            isProcessing = false;
+            updateStats();
+        }
+
+        // Update stats display
+        function updateStats() {
+            document.getElementById('score').textContent = score;
+            document.getElementById('level').textContent = level;
+            document.getElementById('difficultyIndicator').textContent = difficultySettings[difficulty].name;
+        }
+
+        // Generate question
+        function generateQuestion() {
+            if (!gameActive) return;
+            
+            clearInterval(timerInterval);
+            
+            // Show loading state
+            document.getElementById('question').innerHTML = '<div class="loading"><i class="fas fa-spinner"></i> Loading...</div>';
+            
+            setTimeout(() => {
+                const settings = difficultySettings[difficulty];
+                const num1 = Math.floor(Math.random() * (settings.max - settings.min + 1)) + settings.min;
+                const num2 = Math.floor(Math.random() * (settings.max - settings.min + 1)) + settings.min;
+                const correctAnswer = num1 + num2;
+                
+                currentQuestion = {
+                    num1: num1,
+                    num2: num2,
+                    answer: correctAnswer
+                };
+                
+                document.getElementById('question').textContent = `${num1} + ${num2} = ?`;
+                
+                // Generate answer options
+                const answers = [correctAnswer];
+                while (answers.length < 4) {
+                    const offset = Math.floor(Math.random() * 20) - 10;
+                    const wrongAnswer = correctAnswer + offset;
+                    if (wrongAnswer > 0 && !answers.includes(wrongAnswer)) {
+                        answers.push(wrongAnswer);
+                    }
+                }
+                
+                // Shuffle answers
+                answers.sort(() => Math.random() - 0.5);
+                
+                // Update answer buttons
+                const answerBtns = document.querySelectorAll('.answer-btn');
+                answerBtns.forEach((btn, index) => {
+                    btn.textContent = answers[index];
+                    btn.classList.remove('correct', 'incorrect');
+                    btn.disabled = false;
+                });
+                
+                document.getElementById('feedback').textContent = '';
+                isProcessing = false;
+                
+                // Start timer
+                startTimer();
+            }, 300);
+        }
+
+        // Start timer
+        function startTimer() {
+            totalTime = difficultySettings[difficulty].time;
+            timeLeft = totalTime;
+            updateTimerBar();
+            
+            const animateTimer = () => {
+                timeLeft -= 0.1;
+                updateTimerBar();
+                
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    handleTimeout();
+                }
+            };
+            
+            timerInterval = setInterval(animateTimer, 100);
+        }
+
+        // Update timer bar
+        function updateTimerBar() {
+            const percentage = Math.max(0, (timeLeft / totalTime) * 100);
+            const timerBar = document.getElementById('timerBar');
+            timerBar.style.width = percentage + '%';
+            timerBar.setAttribute('aria-valuenow', Math.round(percentage));
+            
+            // Change color based on time left
+            timerBar.classList.remove('warning', 'danger');
+            if (percentage <= 20) {
+                timerBar.classList.add('danger');
+            } else if (percentage <= 40) {
+                timerBar.classList.add('warning');
+            }
+        }
+
+        // Handle timeout
+        function handleTimeout() {
+            if (isProcessing || !gameActive) return;
+            
+            isProcessing = true;
+            totalQuestions++;
+            
+            // Mark all answers as incorrect
+            document.querySelectorAll('.answer-btn').forEach(btn => {
+                btn.disabled = true;
+                if (parseInt(btn.textContent) === currentQuestion.answer) {
+                    btn.classList.add('correct');
+                }
+            });
+            
+            document.getElementById('feedback').textContent = `Time's up! The answer was ${currentQuestion.answer}`;
+            document.getElementById('feedback').className = 'feedback incorrect';
+            
+            playSound('incorrect');
+            
+            // Decrease difficulty on timeout
+            if (difficulty > 1 && document.getElementById('difficultySelect').value === 'auto') {
+                difficulty--;
+                level = Math.max(1, level - 1);
+            }
+            
+            updateStats();
+            
+            // Auto-proceed to next question or end game
+            setTimeout(() => {
+                if (totalQuestions >= 20) {
+                    endGame();
+                } else {
+                    generateQuestion();
+                }
+            }, 1500);
+        }
+
+        // Check answer
+        function checkAnswer(btn) {
+            if (isProcessing || !gameActive) return;
+            
+            isProcessing = true;
+            clearInterval(timerInterval);
+            
+            const selectedAnswer = parseInt(btn.textContent);
+            const isCorrect = selectedAnswer === currentQuestion.answer;
+            
+            totalQuestions++;
+            
+            if (isCorrect) {
+                btn.classList.add('correct');
+                // Bonus points for speed
+                const timeBonus = Math.floor((timeLeft / totalTime) * 5);
+                score += difficultySettings[difficulty].points + timeBonus;
+                correctAnswers++;
+                document.getElementById('feedback').textContent = `Correct! +${difficultySettings[difficulty].points + timeBonus} points`;
+                document.getElementById('feedback').className = 'feedback correct';
+                
+                playSound('correct');
+                
+                // Create particle effect
+                if (document.getElementById('animationToggle').checked) {
+                    createParticles(btn);
+                }
+                
+                // Increase difficulty
+                if (correctAnswers % 3 === 0 && difficulty < 5 && document.getElementById('difficultySelect').value === 'auto') {
+                    difficulty++;
+                    level++;
+                    playSound('levelUp');
+                    if (document.getElementById('animationToggle').checked) {
+                        createConfetti();
+                    }
+                }
+            } else {
+                btn.classList.add('incorrect');
+                // Show correct answer
+                document.querySelectorAll('.answer-btn').forEach(b => {
+                    if (parseInt(b.textContent) === currentQuestion.answer) {
+                        b.classList.add('correct');
+                    }
+                });
+                document.getElementById('feedback').textContent = `Incorrect! The answer was ${currentQuestion.answer}`;
+                document.getElementById('feedback').className = 'feedback incorrect';
+                
+                playSound('incorrect');
+                
+                // Decrease difficulty
+                if (difficulty > 1 && document.getElementById('difficultySelect').value === 'auto') {
+                    difficulty--;
+                    level = Math.max(1, level - 1);
+                }
+            }
+            
+            // Disable all buttons
+            document.querySelectorAll('.answer-btn').forEach(b => b.disabled = true);
+            
+            updateStats();
+            
+            // Auto-proceed to next question or end game
+            setTimeout(() => {
+                if (totalQuestions >= 20) {
+                    endGame();
+                } else {
+                    generateQuestion();
+                }
+            }, 1500);
+        }
+
+        // Create particle effect
+        function createParticles(element) {
+            const rect = element.getBoundingClientRect();
+            const containerRect = document.querySelector('.game-card').getBoundingClientRect();
+            
+            for (let i = 0; i < 15; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = (rect.left - containerRect.left + rect.width / 2) + 'px';
+                particle.style.top = (rect.top - containerRect.top + rect.height / 2) + 'px';
+                particle.style.setProperty('--x', (Math.random() - 0.5) * 100 + 'px');
+                particle.style.setProperty('--y', (Math.random() - 0.5) * 100 + 'px');
+                particle.style.background = ['#667eea', '#764ba2', '#4caf50', '#8bc34a'][Math.floor(Math.random() * 4)];
+                
+                document.querySelector('.game-card').appendChild(particle);
+                setTimeout(() => particle.remove(), 1000);
+            }
+        }
+
+        // End game
+        function endGame() {
+            gameActive = false;
+            clearInterval(timerInterval);
+            document.getElementById('gameScreen').classList.remove('active');
+            document.getElementById('gameOverScreen').classList.add('active');
+            document.getElementById('finalScore').textContent = score;
+            
+            // Save high score
+            saveHighScore(score);
+            
+            // Display high scores
+            displayHighScores();
+            
+            const accuracy = (correctAnswers / totalQuestions * 100).toFixed(1);
+            let message = '';
+            
+            if (accuracy >= 90) {
+                message = 'Outstanding! You\'re a math wizard! 🌟';
+            } else if (accuracy >= 70) {
+                message = 'Great job! Keep practicing! 👏';
+            } else if (accuracy >= 50) {
+                message = 'Good effort! Practice makes perfect! 💪';
+            } else {
+                message = 'Keep trying! You\'ll get better! 📚';
+            }
+            
+            document.getElementById('performanceMessage').textContent = 
+                `${message} (Accuracy: ${accuracy}%)`;
+        }
+
+        // Save high score
+        function saveHighScore(score) {
+            const highScores = JSON.parse(localStorage.getItem('sumAndSolveHighScores') || '[]');
+            const accuracy = (correctAnswers / totalQuestions * 100).toFixed(1);
+            
+            highScores.push({
+                score: score,
+                date: new Date().toLocaleDateString(),
+                accuracy: accuracy
+            });
+            
+            highScores.sort((a, b) => b.score - a.score);
+            highScores.splice(10); // Keep top 10
+            
+            localStorage.setItem('sumAndSolveHighScores', JSON.stringify(highScores));
+        }
+
+        // Display high scores
+        function displayHighScores() {
+            const highScores = JSON.parse(localStorage.getItem('sumAndSolveHighScores') || '[]');
+            const highScoresList = document.getElementById('highScoresList');
+            
+            if (highScores.length === 0) {
+                highScoresList.innerHTML = '<p style="text-align: center; color: #666;">No high scores yet!</p>';
+                return;
+            }
+            
+            highScoresList.innerHTML = highScores.map((score, index) => `
+                <div class="high-score-item">
+                    <span>#${index + 1}</span>
+                    <span>${score.score} points</span>
+                    <span>${score.accuracy}%</span>
+                    <span>${score.date}</span>
+                </div>
+            `).join('');
+        }
+
+        // Reset game
+        function resetGame() {
+            document.getElementById('gameOverScreen').classList.remove('active');
+            document.getElementById('startScreen').classList.add('active');
+        }
+
+        // Create confetti
+        function createConfetti() {
+            const colors = ['#667eea', '#764ba2', '#f093fb', '#f5576c', '#4facfe', '#00f2fe'];
+            for (let i = 0; i < 30; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.style.left = Math.random() * 100 + '%';
+                    confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.animationDelay = Math.random() * 0.5 + 's';
+                    document.querySelector('.game-card').appendChild(confetti);
+                    
+                    setTimeout(() => confetti.remove(), 3000);
+                }, i * 50);
+            }
+        }
+
+        // Share on Twitter
+        function shareOnTwitter() {
+            const text = `I just scored ${score} points on Sum & Solve! Can you beat my score?`;
+            const url = 'https://sumandsolve.com';
+            window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`, '_blank');
+        }
+
+        // Share on Facebook
+        function shareOnFacebook() {
+            const url = 'https://sumandsolve.com';
+            window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`, '_blank');
+        }
+
         // Smooth scroll to game section
         document.querySelector('.cta-button').addEventListener('click', function(e) {
             e.preventDefault();
             document.querySelector('#game').scrollIntoView({ behavior: 'smooth' });
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('navLinks').classList.remove('active');
+            });
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const navLinks = document.getElementById('navLinks');
+            const menuToggle = document.querySelector('.menu-toggle');
+            
+            if (!navLinks.contains(event.target) && !menuToggle.contains(event.target)) {
+                navLinks.classList.remove('active');
+            }
         });
     </script>
 </body>
