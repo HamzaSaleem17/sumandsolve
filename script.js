@@ -14,12 +14,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const scoreDisplay = document.getElementById('score');
     const levelDisplay = document.getElementById('level');
     const progressDisplay = document.getElementById('progress');
-    const timerDisplay = document.getElementById('timer');
     const questionDisplay = document.getElementById('question');
     const feedbackDisplay = document.getElementById('feedback');
     const answerButtons = document.querySelectorAll('.answer-button');
     const badgesContainer = document.getElementById('badges');
     const resetBtn = document.getElementById('reset-btn');
+    const timerContainer = document.querySelector('.timer-container');
+
+    // Debug: Check if elements are found
+    console.log('Start Quiz Button:', startQuizBtn);
+    console.log('Quiz Section:', quizSection);
+    console.log('Timer Container:', timerContainer);
 
     // Initialize game
     function initGame() {
@@ -27,8 +32,17 @@ document.addEventListener('DOMContentLoaded', () => {
         updateBadges();
         
         // Event listeners
-        startQuizBtn.addEventListener('click', startQuiz);
-        resetBtn.addEventListener('click', resetGame);
+        if (startQuizBtn) {
+            startQuizBtn.addEventListener('click', startQuiz);
+            console.log('Event listener added to Start Quiz button');
+        } else {
+            console.error('Start Quiz button not found!');
+        }
+        
+        if (resetBtn) {
+            resetBtn.addEventListener('click', resetGame);
+        }
+        
         answerButtons.forEach(button => {
             button.addEventListener('click', handleAnswer);
         });
@@ -36,12 +50,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Start the quiz
     function startQuiz() {
-        quizSection.classList.remove('hidden');
-        window.scrollTo({
-            top: quizSection.offsetTop,
-            behavior: 'smooth'
-        });
-        generateQuestion();
+        console.log('Start Quiz function called');
+        
+        if (quizSection) {
+            quizSection.classList.remove('hidden');
+            console.log('Quiz section revealed');
+            
+            // Smooth scroll to quiz section
+            setTimeout(() => {
+                window.scrollTo({
+                    top: quizSection.offsetTop - 20,
+                    behavior: 'smooth'
+                });
+            }, 100);
+            
+            generateQuestion();
+        } else {
+            console.error('Quiz section not found!');
+        }
     }
 
     // Reset the game
@@ -71,10 +97,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Update display elements
     function updateDisplay() {
-        scoreDisplay.textContent = currentScore;
-        levelDisplay.textContent = currentLevel;
-        progressDisplay.textContent = `${correctAnswers}/20`;
-        timerDisplay.textContent = timeLeft;
+        if (scoreDisplay) scoreDisplay.textContent = currentScore;
+        if (levelDisplay) levelDisplay.textContent = currentLevel;
+        if (progressDisplay) progressDisplay.textContent = `${correctAnswers}/20`;
         
         // Update level based on score
         updateLevelBasedOnScore();
@@ -100,7 +125,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // Start the timer
     function startTimer() {
         timeLeft = 30;
-        timerDisplay.textContent = timeLeft;
         
         // Clear any existing timer
         if (timerInterval) {
@@ -109,24 +133,33 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // Reset progress bar
         const progressBar = document.querySelector('.timer-progress');
-        progressBar.style.width = '100%';
+        if (progressBar) {
+            progressBar.style.width = '100%';
+        }
         
         // Remove warning class
-        timerDisplay.parentElement.classList.remove('warning');
+        if (timerContainer) {
+            timerContainer.classList.remove('warning');
+        }
         
         timerInterval = setInterval(() => {
             timeLeft--;
-            timerDisplay.textContent = timeLeft;
             
             // Update progress bar
-            const progressPercentage = (timeLeft / 30) * 100;
-            progressBar.style.width = `${progressPercentage}%`;
+            if (progressBar) {
+                const progressPercentage = (timeLeft / 30) * 100;
+                progressBar.style.width = `${progressPercentage}%`;
+            }
             
             // Add warning class when time is running out
             if (timeLeft <= 10) {
-                timerDisplay.parentElement.classList.add('warning');
+                if (timerContainer) {
+                    timerContainer.classList.add('warning');
+                }
             } else {
-                timerDisplay.parentElement.classList.remove('warning');
+                if (timerContainer) {
+                    timerContainer.classList.remove('warning');
+                }
             }
             
             // Time's up!
@@ -169,14 +202,19 @@ document.addEventListener('DOMContentLoaded', () => {
     // Generate a new question based on current level
     function generateQuestion() {
         // Reset feedback and button states
-        feedbackDisplay.classList.add('hidden');
+        if (feedbackDisplay) {
+            feedbackDisplay.classList.add('hidden');
+        }
+        
         answerButtons.forEach(button => {
             button.classList.remove('correct', 'incorrect');
             button.disabled = false;
         });
         
         // Remove warning class from timer
-        timerDisplay.parentElement.classList.remove('warning');
+        if (timerContainer) {
+            timerContainer.classList.remove('warning');
+        }
         
         // Start the timer
         startTimer();
@@ -250,7 +288,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         
         currentQuestion = { question, answer };
-        questionDisplay.textContent = question;
+        if (questionDisplay) questionDisplay.textContent = question;
         
         // Generate answer options
         const options = generateAnswerOptions(answer);
@@ -334,26 +372,30 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Show feedback message
     function showFeedback(message, type) {
-        feedbackDisplay.textContent = message;
-        feedbackDisplay.className = `feedback ${type}`;
-        feedbackDisplay.classList.remove('hidden');
+        if (feedbackDisplay) {
+            feedbackDisplay.textContent = message;
+            feedbackDisplay.className = `feedback ${type}`;
+            feedbackDisplay.classList.remove('hidden');
+        }
     }
 
     // Update badges display
     function updateBadges() {
-        badgesContainer.innerHTML = '';
-        
-        for (let i = 1; i <= currentLevel; i++) {
-            const badge = document.createElement('div');
-            badge.className = 'cat-badge';
-            badge.title = `Level ${i} Cat`;
+        if (badgesContainer) {
+            badgesContainer.innerHTML = '';
             
-            const badgeImg = document.createElement('img');
-            badgeImg.src = `images/cat-badge-level-${i}.png`;
-            badgeImg.alt = `Level ${i} Cat Badge`;
-            
-            badge.appendChild(badgeImg);
-            badgesContainer.appendChild(badge);
+            for (let i = 1; i <= currentLevel; i++) {
+                const badge = document.createElement('div');
+                badge.className = 'cat-badge';
+                badge.title = `Level ${i} Cat`;
+                
+                const badgeImg = document.createElement('img');
+                badgeImg.src = `images/cat-badge-level-${i}.png`;
+                badgeImg.alt = `Level ${i} Cat Badge`;
+                
+                badge.appendChild(badgeImg);
+                badgesContainer.appendChild(badge);
+            }
         }
     }
 
@@ -371,7 +413,9 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => {
             notification.classList.remove('show');
             setTimeout(() => {
-                document.body.removeChild(notification);
+                if (document.body.contains(notification)) {
+                    document.body.removeChild(notification);
+                }
             }, 300);
         }, 3000);
     }
