@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sum and Solve - Interactive Math Quizzes for All Levels</title>
-    <meta name="description" content="Improve your math skills with our progressive addition quizzes. Earn points, level up, and collect cat badges as you master addition at every difficulty level.">
-    <meta name="keywords" content="math quiz, addition practice, educational game, learn math, math for kids">
+    <title>Math Learning Blog - Sum and Solve</title>
+    <meta name="description" content="Read our latest articles on math education, learning strategies, and tips for improving your math skills.">
+    <meta name="keywords" content="math education, learning strategies, math tips, addition techniques, math anxiety, gamification in education">
     <meta name="author" content="Sum and Solve">
     <link rel="icon" type="image/png" href="images/favicon.png">
     <link rel="stylesheet" href="style.css">
@@ -13,14 +13,18 @@
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "EducationalGame",
-      "name": "Sum and Solve",
-      "description": "Interactive math quizzes with progressive difficulty levels",
-      "url": "https://sumandsolve.com",
-      "genre": ["Math", "Education", "Quiz"],
-      "gamePlatform": "Web Browser",
-      "applicationCategory": "Game",
-      "operatingSystem": "Any"
+      "@type": "Blog",
+      "name": "Sum and Solve Math Learning Blog",
+      "description": "Articles and resources for improving math skills through effective learning strategies",
+      "url": "https://sumandsolve.com/blog.html",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Sum and Solve",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://sumandsolve.com/images/favicon.png"
+        }
+      }
     }
     </script>
 </head>
@@ -67,156 +71,56 @@
                 <li><a href="index.html">Home</a></li>
                 <li><a href="about.html">About</a></li>
                 <li><a href="resources.html">Resources</a></li>
+                <li><a href="blog.html" class="active">Blog</a></li>
                 <li><a href="terms.html">Terms</a></li>
             </ul>
         </div>
     </nav>
 
     <main>
-        <section id="home" class="hero">
+        <section class="content-section">
             <div class="container">
-                <h2>Improve Your Math Skills While Having Fun</h2>
-                <p>Progress through increasingly challenging levels and earn cat badges!</p>
-                <button id="start-quiz-btn" class="btn-primary">Start Quiz</button>
-            </div>
-        </section>
-
-        <section id="quiz-section" class="quiz-container hidden">
-            <div class="container">
-                <div class="game-info">
-                    <div class="score-display">Score: <span id="score">0</span></div>
-                    <div class="level-display">Level: <span id="level">1</span></div>
-                    <div class="progress-display">Progress: <span id="progress">0/20</span></div>
+                <h2>Math Learning Blog</h2>
+                <div class="blog-intro">
+                    <p>Welcome to our math learning blog! Here you'll find articles, tips, and strategies to help improve your math skills and make learning more enjoyable.</p>
                 </div>
-
-                <div class="timer-container">
-                    <div class="timer-progress-bar">
-                        <div class="timer-progress"></div>
-                    </div>
-                </div>
-
-                <div class="question-container">
-                    <div id="question">Loading question...</div>
-                    <div id="feedback" class="feedback hidden"></div>
-                </div>
-
-                <div class="answer-options">
-                    <button class="answer-button" data-answer="0">0</button>
-                    <button class="answer-button" data-answer="1">1</button>
-                    <button class="answer-button" data-answer="2">2</button>
-                    <button class="answer-button" data-answer="3">3</button>
-                </div>
-
-                <div class="game-controls">
-                    <button id="reset-btn" class="btn-secondary">Reset Game</button>
-                </div>
-
-                <div class="badges-container">
-                    <h3>Your Cat Badges</h3>
-                    <div id="badges"></div>
-                </div>
-            </div>
-        </section>
-
-        <section id="how-it-works" class="content-section">
-            <div class="container">
-                <h2>How It Works</h2>
+                
                 <div class="feature-grid">
-                    <div class="feature-card">
-                        <h3>Answer Questions</h3>
-                        <p>Solve addition problems at your current level.</p>
-                    </div>
-                    <div class="feature-card">
-                        <h3>Earn Points</h3>
-                        <p>Get +5 points for correct answers, -2 for incorrect.</p>
-                    </div>
-                    <div class="feature-card">
-                        <h3>Level Up</h3>
-                        <p>After 20 correct answers, advance to the next level.</p>
-                    </div>
-                    <div class="feature-card">
-                        <h3>Collect Badges</h3>
-                        <p>Earn adorable cat badges for each level completed.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="levels" class="content-section">
-            <div class="container">
-                <h2>Quiz Levels</h2>
-                <div class="level-grid">
-                    <div class="level-card">
-                        <h3>Level 1</h3>
-                        <p>Single digit addition (two numbers)</p>
-                        <div class="example">3 + 5 = ?</div>
-                    </div>
-                    <div class="level-card">
-                        <h3>Level 2</h3>
-                        <p>Two digit addition (two numbers)</p>
-                        <div class="example">24 + 17 = ?</div>
-                    </div>
-                    <div class="level-card">
-                        <h3>Level 3</h3>
-                        <p>Mix of Level 1 and 2</p>
-                        <div class="example">7 + 42 = ?</div>
-                    </div>
-                    <div class="level-card">
-                        <h3>Level 4</h3>
-                        <p>Two digit addition of three numbers</p>
-                        <div class="example">15 + 23 + 31 = ?</div>
-                    </div>
-                    <div class="level-card">
-                        <h3>Level 5+</h3>
-                        <p>Increasing complexity</p>
-                        <div class="example">More digits, more numbers</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="badges" class="content-section">
-            <div class="container">
-                <h2>Cat Badges</h2>
-                <div class="badge-grid">
-                    <div class="badge-card">
-                        <img src="images/cat-badge-level-1.png" alt="Level 1 Cat Badge">
-                        <h3>Level 1: Kitten</h3>
-                        <p>Complete your first level!</p>
-                    </div>
-                    <div class="badge-card">
-                        <img src="images/cat-badge-level-2.png" alt="Level 2 Cat Badge">
-                        <h3>Level 2: House Cat</h3>
-                        <p>Master two-digit addition!</p>
-                    </div>
-                    <div class="badge-card">
-                        <img src="images/cat-badge-level-3.png" alt="Level 3 Cat Badge">
-                        <h3>Level 3: Clever Cat</h3>
-                        <p>Handle mixed difficulty!</p>
-                    </div>
-                    <div class="badge-card">
-                        <img src="images/cat-badge-level-4.png" alt="Level 4 Cat Badge">
-                        <h3>Level 4: Math Cat</h3>
-                        <p>Conquer three-number addition!</p>
-                    </div>
-                    <div class="badge-card">
-                        <img src="images/cat-badge-level-5.png" alt="Level 5 Cat Badge">
-                        <h3>Level 5: Genius Cat</h3>
-                        <p>Advanced math skills!</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <div class="container">
-            <p>&copy; 2023 Sum and Solve. All rights reserved.</p>
-            <p>Improve your math skills one problem at a time!</p>
-        </div>
-    </footer>
-
-    <script src="script.js"></script>
-</body>
-</html>
-
+                    <article class="feature-card blog-post">
+                        <h3>5 Effective Strategies for Learning Addition</h3>
+                        <p class="blog-meta">Published on October 15, 2023 | 5 min read</p>
+                        <p>Discover proven techniques that can help students master addition quickly and efficiently. From visual aids to mental math tricks, these strategies cater to different learning styles.</p>
+                        <div class="blog-excerpt">
+                            <p>Addition is one of the fundamental building blocks of mathematics. To help learners master this essential skill, we've compiled five effective strategies that have been proven to work across different age groups and learning abilities...</p>
+                        </div>
+                        <a href="#" class="read-more">Read More</a>
+                    </article>
+                    
+                    <article class="feature-card blog-post">
+                        <h3>The Importance of Math in Everyday Life</h3>
+                        <p class="blog-meta">Published on October 10, 2023 | 4 min read</p>
+                        <p>Explore how addition and other math skills are used in daily activities, from shopping to cooking. Understanding these real-world applications can motivate learners.</p>
+                        <div class="blog-excerpt">
+                            <p>Mathematics is everywhere in our daily lives, even when we don't realize it. From calculating discounts at the store to measuring ingredients for a recipe, addition skills are constantly being used...</p>
+                        </div>
+                        <a href="#" class="read-more">Read More</a>
+                    </article>
+                    
+                    <article class="feature-card blog-post">
+                        <h3>Making Math Fun: Gamification in Education</h3>
+                        <p class="blog-meta">Published on October 5, 2023 | 6 min read</p>
+                        <p>Learn how game-based learning can transform math education from a chore into an enjoyable activity. We explore the psychology behind gamification and its benefits.</p>
+                        <div class="blog-excerpt">
+                            <p>Gamification has revolutionized the way we approach education, particularly in subjects like mathematics that students often find challenging. By incorporating game elements into learning...</p>
+                        </div>
+                        <a href="#" class="read-more">Read More</a>
+                    </article>
+                    
+                    <article class="feature-card blog-post">
+                        <h3>Helping Children Overcome Math Anxiety</h3>
+                        <p class="blog-meta">Published on September 28, 2023 | 5 min read</p>
+                        <p>Math anxiety is a common issue that can hinder learning. This article provides practical tips for parents and educators to help children build confidence in math.</p>
+                        <div class="blog-excerpt">
+                            <p>Math anxiety affects millions of students worldwide, creating a mental block that prevents them from reaching their full potential. As parents and educators, we play a crucial role in helping children overcome this anxiety...</p>
+                        </div>
+                        <a href="#" class="read-more">
