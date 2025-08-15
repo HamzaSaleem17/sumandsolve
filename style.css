@@ -958,4 +958,130 @@ footer p {
     color: var(--secondary-color);
     text-decoration: underline;
 }
+/* Blog Page Styles */
+.blog-intro {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 3rem;
+    font-size: 1.2rem;
+    color: var(--dark-color);
+}
+
+.blog-post {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.blog-meta {
+    font-size: 0.9rem;
+    color: #64748b;
+    margin-bottom: 1rem;
+    font-style: italic;
+}
+
+.blog-excerpt {
+    margin: 1rem 0;
+    flex-grow: 1;
+}
+
+.blog-excerpt p {
+    color: #475569;
+    line-height: 1.6;
+}
+
+.read-more {
+    display: inline-block;
+    margin-top: auto;
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: bold;
+    transition: var(--transition);
+    align-self: flex-start;
+}
+
+.read-more:hover {
+    color: var(--secondary-color);
+    text-decoration: underline;
+}
+
+.blog-cta {
+    text-align: center;
+    margin-top: 4rem;
+    padding: 2rem;
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(236, 72, 153, 0.1) 100%);
+    border-radius: 20px;
+}
+
+.blog-cta h3 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+}
+
+.blog-cta p {
+    margin-bottom: 1.5rem;
+    font-size: 1.1rem;
+}
+
+nav ul li a.active {
+    color: var(--accent-color);
+}
+
+nav ul li a.active::before {
+    width: 80%;
+}
+
+/* Responsive adjustments for blog */
+@media screen and (max-width: 768px) {
+    .blog-intro {
+        font-size: 1.1rem;
+        margin-bottom: 2rem;
+    }
+    
+    .blog-meta {
+        font-size: 0.85rem;
+    }
+    
+    .blog-excerpt p {
+        font-size: 0.95rem;
+    }
+    
+    .blog-cta {
+        padding: 1.5rem;
+        margin-top: 3rem;
+    }
+    
+    .blog-cta h3 {
+        font-size: 1.5rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .blog-intro {
+        font-size: 1rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .blog-meta {
+        font-size: 0.8rem;
+    }
+    
+    .blog-excerpt p {
+        font-size: 0.9rem;
+    }
+    
+    .blog-cta {
+        padding: 1.2rem;
+        margin-top: 2rem;
+    }
+    
+    .blog-cta h3 {
+        font-size: 1.3rem;
+    }
+    
+    .blog-cta p {
+        font-size: 1rem;
+    }
+}
 
