@@ -107,9 +107,20 @@ document.addEventListener('DOMContentLoaded', () => {
             clearInterval(timerInterval);
         }
         
+        // Reset progress bar
+        const progressBar = document.querySelector('.timer-progress');
+        progressBar.style.width = '100%';
+        
+        // Remove warning class
+        timerDisplay.parentElement.classList.remove('warning');
+        
         timerInterval = setInterval(() => {
             timeLeft--;
             timerDisplay.textContent = timeLeft;
+            
+            // Update progress bar
+            const progressPercentage = (timeLeft / 30) * 100;
+            progressBar.style.width = `${progressPercentage}%`;
             
             // Add warning class when time is running out
             if (timeLeft <= 10) {
@@ -136,7 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Show feedback
         showFeedback("Time's up! -2 points", 'incorrect');
         
-        // Save to localStorage (for persistence during session)
+        // Save to sessionStorage (for persistence during session)
         sessionStorage.setItem('userScore', currentScore);
         sessionStorage.setItem('currentLevel', currentLevel);
         sessionStorage.setItem('correctAnswers', correctAnswers);
