@@ -25,6 +25,35 @@
     </script>
 </head>
 <body>
+    <!-- Dynamic Background -->
+    <div class="math-background">
+        <div class="math-element equation-1">x² + y² = r²</div>
+        <div class="math-element equation-2">f(x) = ax² + bx + c</div>
+        <div class="math-element equation-3">∫ f(x) dx</div>
+        <div class="math-element equation-4">Σ (from i=1 to n)</div>
+        <div class="math-element equation-5">lim (x→∞)</div>
+        
+        <svg class="math-graph graph-1" viewBox="0 0 200 200">
+            <path d="M10,100 Q50,50 100,100 T190,100" stroke="rgba(99, 102, 241, 0.3)" stroke-width="2" fill="none" />
+            <circle cx="100" cy="100" r="80" stroke="rgba(99, 102, 241, 0.2)" stroke-width="1" fill="none" />
+        </svg>
+        
+        <svg class="math-graph graph-2" viewBox="0 0 200 200">
+            <path d="M10,150 C50,50 150,50 190,150" stroke="rgba(236, 72, 153, 0.3)" stroke-width="2" fill="none" />
+            <path d="M10,50 C50,150 150,150 190,50" stroke="rgba(236, 72, 153, 0.3)" stroke-width="2" fill="none" />
+        </svg>
+        
+        <svg class="math-graph graph-3" viewBox="0 0 200 200">
+            <path d="M100,10 L100,190 M10,100 L190,100" stroke="rgba(99, 102, 241, 0.2)" stroke-width="1" />
+            <path d="M10,10 Q100,100 190,10" stroke="rgba(99, 102, 241, 0.25)" stroke-width="1" fill="none" />
+        </svg>
+        
+        <svg class="math-graph graph-4" viewBox="0 0 200 200">
+            <path d="M100,10 C50,100 150,100 100,190" stroke="rgba(236, 72, 153, 0.25)" stroke-width="1" fill="none" />
+            <circle cx="100" cy="100" r="5" fill="rgba(236, 72, 153, 0.3)" />
+        </svg>
+    </div>
+
     <header>
         <div class="container">
             <h1>Sum and Solve</h1>
@@ -58,7 +87,13 @@
                     <div class="score-display">Score: <span id="score">0</span></div>
                     <div class="level-display">Level: <span id="level">1</span></div>
                     <div class="progress-display">Progress: <span id="progress">0/20</span></div>
-                    <div class="timer-display">Time: <span id="timer">30</span>s</div>
+                </div>
+
+                <div class="timer-container">
+                    <div class="timer-progress-bar">
+                        <div class="timer-progress"></div>
+                    </div>
+                    <div class="timer-text">Time: <span id="timer">30</span>s</div>
                 </div>
 
                 <div class="question-container">
@@ -129,7 +164,7 @@
                     </div>
                     <div class="level-card">
                         <h3>Level 4</h3>
-                        <p>Two digit addition (three numbers)</p>
+                        <p>Two digit addition of three numbers</p>
                         <div class="example">15 + 23 + 31 = ?</div>
                     </div>
                     <div class="level-card">
