@@ -381,7 +381,6 @@ nav ul li a:hover {
 /* Timer Progress Bar */
 .timer-container {
     margin: 0 0 1.5rem 0;
-    text-align: center;
 }
 
 .timer-progress-bar {
@@ -390,7 +389,6 @@ nav ul li a:hover {
     background-color: #e0e0e0;
     border-radius: 5px;
     overflow: hidden;
-    margin-bottom: 0.5rem;
 }
 
 .timer-progress {
@@ -399,16 +397,6 @@ nav ul li a:hover {
     background: var(--gradient-2);
     border-radius: 5px;
     transition: width 1s linear;
-}
-
-.timer-text {
-    font-size: 1rem;
-    color: var(--dark-color);
-    font-weight: bold;
-}
-
-.timer-text.warning {
-    color: var(--error-color);
 }
 
 .question-container {
@@ -944,3 +932,4 @@ footer p {
         padding: 6px 8px;
     }
 }
+
