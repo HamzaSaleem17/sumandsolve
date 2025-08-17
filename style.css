@@ -473,6 +473,15 @@ nav ul li a:hover {
     gap: 12px;
     margin-bottom: 1.5rem;
     z-index: 10;
+    position: relative;
+}
+
+.answer-buttons-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    z-index: 20;
+    position: relative;
 }
 
 .answer-button {
@@ -488,9 +497,11 @@ nav ul li a:hover {
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
     position: relative;
     overflow: visible;
-    z-index: 20;
+    z-index: 30;
     min-height: 44px;
-    touch-action: manipulation;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .answer-button::before {
@@ -882,10 +893,15 @@ nav ul li a.active::before {
         gap: 10px;
     }
     
+    .answer-buttons-container {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
     .answer-button {
         font-size: 1.4rem;
-        padding: 12px;
-        min-height: 48px;
+        padding: 15px;
+        min-height: 50px;
     }
     
     .feature-grid, .level-grid, .badge-grid {
@@ -976,15 +992,16 @@ nav ul li a.active::before {
         -moz-user-select: none;
         -ms-user-select: none;
         position: relative;
-        z-index: 30 !important;
+        z-index: 50 !important;
         pointer-events: auto !important;
+        border: 2px solid #ccc !important;
     }
     
     /* Force button state reset with !important */
     .answer-button:not(.correct):not(.incorrect) {
         background-color: var(--light-color) !important;
         color: var(--dark-color) !important;
-        border: none !important;
+        border: 2px solid #ccc !important;
         box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05) !important;
         transform: none !important;
         pointer-events: auto !important;
@@ -1020,6 +1037,10 @@ nav ul li a.active::before {
     /* Ensure buttons are above all other elements */
     .answer-options {
         z-index: 25 !important;
+    }
+    
+    .answer-buttons-container {
+        z-index: 35 !important;
     }
 }
 
@@ -1081,6 +1102,7 @@ nav ul li a.active::before {
         font-size: 1.2rem;
         padding: 12px;
         min-height: 44px;
+        border: 2px solid #ccc !important;
     }
     
     .cat-badge {
@@ -1149,8 +1171,9 @@ nav ul li a.active::before {
     /* Extra button fixes for very small screens */
     .answer-button {
         min-height: 44px !important;
-        z-index: 30 !important;
+        z-index: 50 !important;
         pointer-events: auto !important;
+        border: 2px solid #ccc !important;
     }
 }
 
@@ -1180,6 +1203,7 @@ nav ul li a.active::before {
         font-size: 1.1rem;
         padding: 10px;
         min-height: 44px !important;
+        border: 2px solid #ccc !important;
     }
     
     .cat-badge {
@@ -1198,8 +1222,9 @@ nav ul li a.active::before {
     
     /* Ensure buttons are still clickable on smallest screens */
     .answer-button {
-        z-index: 30 !important;
+        z-index: 50 !important;
         pointer-events: auto !important;
+        border: 2px solid #ccc !important;
     }
 }
 
@@ -1207,9 +1232,18 @@ nav ul li a.active::before {
 .answer-button.clean {
     background-color: var(--light-color) !important;
     color: var(--dark-color) !important;
-    border: none !important;
+    border: 2px solid #ccc !important;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05) !important;
     transform: none !important;
-    z-index: 30 !important;
+    z-index: 50 !important;
+    pointer-events: auto !important;
+}
+
+/* Mobile-specific button test styles */
+.mobile-test-button {
+    background-color: red !important;
+    color: white !important;
+    border: 2px solid red !important;
+    z-index: 100 !important;
     pointer-events: auto !important;
 }
