@@ -1247,3 +1247,148 @@ nav ul li a.active::before {
     z-index: 100 !important;
     pointer-events: auto !important;
 }
+
+/* Add this to your CSS file */
+.answer-button {
+    /* Keep all existing styles and add these */
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+/* Remove any default focus outlines that might be rectangular */
+.answer-button:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.5);
+    border-radius: 12px;
+}
+
+/* Mobile-specific focus styles */
+@media screen and (max-width: 768px) {
+    .answer-button:focus {
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.5);
+        border-radius: 12px;
+    }
+}
+/* Add this to your CSS file */
+.quiz-container {
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+    padding: 2rem;
+    margin: 3rem auto; /* Increased from 2rem */
+    max-width: 800px;
+    width: 100%;
+    box-sizing: border-box;
+    position: relative;
+    overflow: hidden;
+    z-index: 10;
+}
+
+/* Mobile-specific adjustments */
+@media screen and (max-width: 768px) {
+    .quiz-container {
+        padding: 1.5rem;
+        margin: 2rem auto; /* Increased from 1.5rem */
+    }
+}
+
+/* Very small mobile adjustments */
+@media screen and (max-width: 480px) {
+    .quiz-container {
+        padding: 1rem;
+        margin: 1.5rem auto; /* Increased from 1rem */
+    }
+}
+/* Add this to your CSS file */
+@media screen and (max-width: 768px) {
+    .answer-button {
+        -webkit-tap-highlight-color: transparent;
+        touch-action: manipulation;
+        transition: background-color 0.1s ease;
+        user-select: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        position: relative;
+        z-index: 50 !important;
+        pointer-events: auto !important;
+        border: 2px solid #ccc !important;
+        border-radius: 12px !important;
+    }
+    
+    /* Force button state reset with !important */
+    .answer-button:not(.correct):not(.incorrect) {
+        background-color: var(--light-color) !important;
+        color: var(--dark-color) !important;
+        border: 2px solid #ccc !important;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05) !important;
+        transform: none !important;
+        pointer-events: auto !important;
+    }
+    
+    /* Add hover effect for mobile */
+    .answer-button:hover:not(.correct):not(.incorrect) {
+        background-color: var(--light-color) !important;
+        color: var(--dark-color) !important;
+        border: 2px solid var(--primary-color) !important;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1) !important;
+        transform: translateY(-3px) !important;
+    }
+    
+    /* Add these new rules */
+    .answer-button::before,
+    .answer-button::after {
+        display: none !important;
+    }
+    
+    /* Override any lingering styles */
+    .answer-button.correct,
+    .answer-button.incorrect {
+        animation: none !important;
+        transition: none !important;
+        pointer-events: auto !important;
+    }
+    
+    /* Remove any focus outlines that might persist */
+    .answer-button:focus {
+        outline: none !important;
+        box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.5) !important;
+        pointer-events: auto !important;
+    }
+    
+    /* Remove active state styling that might persist */
+    .answer-button:active {
+        background-color: var(--light-color) !important;
+        pointer-events: auto !important;
+    }
+    
+    /* Ensure buttons are above all other elements */
+    .answer-options {
+        z-index: 25 !important;
+    }
+    
+    .answer-buttons-container {
+        z-index: 35 !important;
+    }
+}
+
+/* For very small screens */
+@media screen and (max-width: 480px) {
+    .answer-button {
+        font-size: 1.2rem;
+        padding: 12px;
+        min-height: 44px;
+        border: 2px solid #ccc !important;
+        border-radius: 12px !important;
+    }
+    
+    /* Add hover effect for very small screens */
+    .answer-button:hover:not(.correct):not(.incorrect) {
+        background-color: var(--light-color) !important;
+        color: var(--dark-color) !important;
+        border: 2px solid var(--primary-color) !important;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1) !important;
+        transform: translateY(-3px) !important;
+    }
+}
