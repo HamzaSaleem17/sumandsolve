@@ -382,12 +382,15 @@ nav ul li a:hover {
 .timer-container {
     margin: 0 0 1.5rem 0;
 }
+
 .timer-container.warning .timer-progress-bar {
-background-color: rgba(239, 68, 68, 0.1);
+    background-color: rgba(239, 68, 68, 0.1);
 }
+
 .timer-container.warning .timer-progress {
-background-color: var(--error-color);
+    background-color: var(--error-color);
 }
+
 .timer-progress-bar {
     width: 100%;
     height: 10px;
@@ -704,7 +707,6 @@ background-color: var(--error-color);
 }
 
 /* Footer */
-
 footer {
     background: var(--gradient-1);
     color: white;
@@ -754,215 +756,6 @@ footer p {
     transform: translateX(-50%) translateY(0);
 }
 
-/* Responsive Design */
-/* Responsive Design */
-@media screen and (max-width: 768px) {
-    header h1 {
-        font-size: 2.5rem;
-    }
-    
-    header p {
-        font-size: 1.1rem;
-    }
-    
-    .hero h2 {
-        font-size: 2.5rem;
-    }
-    
-    .hero p {
-        font-size: 1.3rem;
-    }
-    
-    .quiz-container {
-        padding: 1.5rem;
-        margin: 1.5rem auto;
-    }
-    
-    #question {
-        font-size: 2.2rem;
-    }
-    
-    .answer-options {
-        grid-template-columns: 1fr;
-        gap: 10px;
-    }
-    
-    .answer-button {
-        font-size: 1.4rem;
-        padding: 12px;
-    }
-    
-    .feature-grid, .level-grid, .badge-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .game-info div {
-        font-size: 0.85rem;
-        padding: 8px 10px;
-    }
-    
-    .timer-container {
-        margin-bottom: 1.2rem;
-    }
-    
-    .cat-badge {
-        width: 45px;
-        height: 45px;
-    }
-    
-    .content-section {
-        padding: 3rem 0;
-    }
-    
-    .content-section h2 {
-        font-size: 2.2rem;
-    }
-}
-
-@media screen and (max-width: 480px) {
-    nav ul {
-        flex-direction: column;
-        align-items: center;
-        padding: 0.8rem 0;
-    }
-    
-    nav ul li {
-        margin: 0.3rem 0;
-    }
-    
-    .game-info {
-        flex-direction: column;
-        gap: 0.5rem;
-    }
-    
-    .game-info div {
-        width: 100%;
-        text-align: center;
-    }
-    
-    .hero {
-        padding: 3rem 0;
-    }
-    
-    .hero h2 {
-        font-size: 2.2rem;
-    }
-    
-    .hero p {
-        font-size: 1.2rem;
-        margin-bottom: 2rem;
-    }
-    
-    .content-section {
-        padding: 3rem 0;
-    }
-    
-    .content-section h2 {
-        font-size: 2.2rem;
-        margin-bottom: 2rem;
-    }
-    
-    #question {
-        font-size: 1.8rem;
-    }
-    
-    .answer-button {
-        font-size: 1.2rem;
-        padding: 12px;
-    }
-    
-    .cat-badge {
-        width: 40px;
-        height: 40px;
-    }
-    
-    .feature-card, .level-card, .badge-card {
-        padding: 1.5rem;
-    }
-    
-    .feature-card h3, .level-card h3, .badge-card h3 {
-        font-size: 1.4rem;
-    }
-    
-    .example {
-        font-size: 1.1rem;
-        padding: 10px;
-    }
-    
-    .badge-card img {
-        width: 80px;
-        height: 80px;
-    }
-    
-    .btn-primary {
-        padding: 12px 25px;
-        font-size: 1.1rem;
-    }
-    
-    .btn-secondary {
-        padding: 8px 18px;
-        font-size: 0.95rem;
-    }
-    
-    footer {
-        padding: 2rem 0;
-    }
-}
-
-@media screen and (max-width: 320px) {
-    .container {
-        width: 95%;
-        padding: 0 10px;
-    }
-    
-    header h1 {
-        font-size: 2rem;
-    }
-    
-    .hero h2 {
-        font-size: 1.8rem;
-    }
-    
-    .quiz-container {
-        padding: 1rem;
-    }
-    
-    #question {
-        font-size: 1.6rem;
-    }
-    
-    .answer-button {
-        font-size: 1.1rem;
-        padding: 10px;
-    }
-    
-    .cat-badge {
-        width: 35px;
-        height: 35px;
-    }
-    
-    .game-info div {
-        font-size: 0.8rem;
-        padding: 6px 8px;
-    }
-    
-    .timer-progress-bar {
-        height: 8px;
-    }
-}
-.read-more {
-    display: inline-block;
-    margin-top: 1rem;
-    color: var(--primary-color);
-    text-decoration: none;
-    font-weight: bold;
-    transition: var(--transition);
-}
-
-.read-more:hover {
-    color: var(--secondary-color);
-    text-decoration: underline;
-}
 /* Blog Page Styles */
 .blog-intro {
     text-align: center;
@@ -1037,8 +830,69 @@ nav ul li a.active::before {
     width: 80%;
 }
 
-/* Responsive adjustments for blog */
+/* Responsive Design */
 @media screen and (max-width: 768px) {
+    header h1 {
+        font-size: 2.5rem;
+    }
+    
+    header p {
+        font-size: 1.1rem;
+    }
+    
+    .hero h2 {
+        font-size: 2.5rem;
+    }
+    
+    .hero p {
+        font-size: 1.3rem;
+    }
+    
+    .quiz-container {
+        padding: 1.5rem;
+        margin: 1.5rem auto;
+    }
+    
+    #question {
+        font-size: 2.2rem;
+    }
+    
+    .answer-options {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+    
+    .answer-button {
+        font-size: 1.4rem;
+        padding: 12px;
+    }
+    
+    .feature-grid, .level-grid, .badge-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .game-info div {
+        font-size: 0.85rem;
+        padding: 8px 10px;
+    }
+    
+    .timer-container {
+        margin-bottom: 1.2rem;
+    }
+    
+    .cat-badge {
+        width: 45px;
+        height: 45px;
+    }
+    
+    .content-section {
+        padding: 3rem 0;
+    }
+    
+    .content-section h2 {
+        font-size: 2.2rem;
+    }
+    
     .blog-intro {
         font-size: 1.1rem;
         margin-bottom: 2rem;
@@ -1062,75 +916,7 @@ nav ul li a.active::before {
     }
 }
 
-@media screen and (max-width: 480px) {
-    .blog-intro {
-        font-size: 1rem;
-        margin-bottom: 1.5rem;
-    }
-    
-    .blog-meta {
-        font-size: 0.8rem;
-    }
-    
-    .blog-excerpt p {
-        font-size: 0.9rem;
-    }
-    
-    .blog-cta {
-        padding: 1.2rem;
-        margin-top: 2rem;
-    }
-    
-    .blog-cta h3 {
-        font-size: 1.3rem;
-    }
-    
-    .blog-cta p {
-        font-size: 1rem;
-    }
-}
-
-/* Mobile-specific button fixes */
-@media screen and (max-width: 768px) {
-    .answer-button {
-        -webkit-tap-highlight-color: transparent;
-        touch-action: manipulation;
-        transition: background-color 0.1s ease;
-        user-select: none;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-    }
-    
-    /* Force button state reset with !important */
-    .answer-button:not(.correct):not(.incorrect) {
-        background-color: var(--light-color) !important;
-        color: var(--dark-color) !important;
-        border: none !important;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05) !important;
-        transform: none !important;
-    }
-    
-    /* Override any lingering styles */
-    .answer-button.correct,
-    .answer-button.incorrect {
-        animation: none !important;
-        transition: none !important;
-    }
-    
-    /* Remove any focus outlines that might persist */
-    .answer-button:focus {
-        outline: none !important;
-        box-shadow: none !important;
-    }
-    
-    /* Remove active state styling that might persist */
-    .answer-button:active {
-        background-color: var(--light-color) !important;
-    }
-}
-
-/* Additional mobile navigation fixes */
+/* Mobile Navigation Fixes */
 @media screen and (max-width: 768px) {
     nav {
         position: relative;
@@ -1157,6 +943,50 @@ nav ul li a.active::before {
     /* Ensure quiz section is properly visible on mobile */
     #quiz-section {
         margin-top: 1rem;
+    }
+    
+    /* Mobile-specific button fixes */
+    .answer-button {
+        -webkit-tap-highlight-color: transparent;
+        touch-action: manipulation;
+        transition: background-color 0.1s ease;
+        user-select: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+    }
+    
+    /* Force button state reset with !important */
+    .answer-button:not(.correct):not(.incorrect) {
+        background-color: var(--light-color) !important;
+        color: var(--dark-color) !important;
+        border: none !important;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05) !important;
+        transform: none !important;
+    }
+    
+    /* Add these new rules */
+    .answer-button::before,
+    .answer-button::after {
+        display: none !important;
+    }
+    
+    /* Override any lingering styles */
+    .answer-button.correct,
+    .answer-button.incorrect {
+        animation: none !important;
+        transition: none !important;
+    }
+    
+    /* Remove any focus outlines that might persist */
+    .answer-button:focus {
+        outline: none !important;
+        box-shadow: none !important;
+    }
+    
+    /* Remove active state styling that might persist */
+    .answer-button:active {
+        background-color: var(--light-color) !important;
     }
 }
 
@@ -1187,6 +1017,149 @@ nav ul li a.active::before {
         padding: 6px 8px;
         font-size: 0.8rem;
     }
+    
+    .hero {
+        padding: 3rem 0;
+    }
+    
+    .hero h2 {
+        font-size: 2.2rem;
+    }
+    
+    .hero p {
+        font-size: 1.2rem;
+        margin-bottom: 2rem;
+    }
+    
+    .content-section {
+        padding: 3rem 0;
+    }
+    
+    .content-section h2 {
+        font-size: 2.2rem;
+        margin-bottom: 2rem;
+    }
+    
+    #question {
+        font-size: 1.8rem;
+    }
+    
+    .answer-button {
+        font-size: 1.2rem;
+        padding: 12px;
+    }
+    
+    .cat-badge {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .feature-card, .level-card, .badge-card {
+        padding: 1.5rem;
+    }
+    
+    .feature-card h3, .level-card h3, .badge-card h3 {
+        font-size: 1.4rem;
+    }
+    
+    .example {
+        font-size: 1.1rem;
+        padding: 10px;
+    }
+    
+    .badge-card img {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .btn-primary {
+        padding: 12px 25px;
+        font-size: 1.1rem;
+    }
+    
+    .btn-secondary {
+        padding: 8px 18px;
+        font-size: 0.95rem;
+    }
+    
+    footer {
+        padding: 2rem 0;
+    }
+    
+    .blog-intro {
+        font-size: 1rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .blog-meta {
+        font-size: 0.8rem;
+    }
+    
+    .blog-excerpt p {
+        font-size: 0.9rem;
+    }
+    
+    .blog-cta {
+        padding: 1.2rem;
+        margin-top: 2rem;
+    }
+    
+    .blog-cta h3 {
+        font-size: 1.3rem;
+    }
+    
+    .blog-cta p {
+        font-size: 1rem;
+    }
 }
 
+@media screen and (max-width: 320px) {
+    .container {
+        width: 95%;
+        padding: 0 10px;
+    }
+    
+    header h1 {
+        font-size: 2rem;
+    }
+    
+    .hero h2 {
+        font-size: 1.8rem;
+    }
+    
+    .quiz-container {
+        padding: 1rem;
+    }
+    
+    #question {
+        font-size: 1.6rem;
+    }
+    
+    .answer-button {
+        font-size: 1.1rem;
+        padding: 10px;
+    }
+    
+    .cat-badge {
+        width: 35px;
+        height: 35px;
+    }
+    
+    .game-info div {
+        font-size: 0.8rem;
+        padding: 6px 8px;
+    }
+    
+    .timer-progress-bar {
+        height: 8px;
+    }
+}
 
+/* Button reset class for mobile */
+.answer-button.clean {
+    background-color: var(--light-color) !important;
+    color: var(--dark-color) !important;
+    border: none !important;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05) !important;
+    transform: none !important;
+}
