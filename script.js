@@ -187,23 +187,35 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 1500);
     }
 
+    // Enhanced button reset function for mobile compatibility
+    function resetAnswerButtons() {
+        answerButtons.forEach(button => {
+            // Remove all classes
+            button.classList.remove('correct', 'incorrect');
+            
+            // Reset all inline styles
+            button.style.backgroundColor = '';
+            button.style.color = '';
+            button.style.transform = '';
+            button.style.boxShadow = '';
+            
+            // Reset disabled state
+            button.disabled = false;
+            
+            // Force reflow to ensure styles are applied
+            void button.offsetWidth;
+        });
+    }
+
     // Generate a new question based on current level
     function generateQuestion() {
-        // Reset feedback and button states
+        // Reset feedback
         if (feedbackDisplay) {
             feedbackDisplay.classList.add('hidden');
         }
         
-        // Completely reset all button states
-        answerButtons.forEach(button => {
-            // Remove all classes and re-add the base class
-            button.className = 'answer-button';
-            button.disabled = false;
-            // Remove any inline styles that might have been applied
-            button.style.backgroundColor = '';
-            button.style.color = '';
-            button.style.transform = '';
-        });
+        // Enhanced button reset for mobile
+        resetAnswerButtons();
         
         // Remove warning class from timer
         if (timerContainer) {
