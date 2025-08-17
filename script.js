@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let isAnswering = false;
     let timerInterval;
     let timeLeft = 30;
+    let isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
     // DOM elements
     const startQuizBtn = document.getElementById('start-quiz-btn');
@@ -37,6 +38,13 @@ document.addEventListener('DOMContentLoaded', () => {
         
         answerButtons.forEach(button => {
             button.addEventListener('click', handleAnswer);
+            // Add touch events for mobile
+            button.addEventListener('touchstart', function(e) {
+                // Prevent default to avoid double-tap zoom
+                if (!isAnswering) {
+                    e.preventDefault();
+                }
+            });
         });
     }
 
@@ -187,9 +195,13 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 1500);
     }
 
-    // Enhanced button reset function for mobile compatibility
+    // Aggressive button reset function for mobile compatibility
     function resetAnswerButtons() {
-        answerButtons.forEach(button => {
+        console.log('Resetting answer buttons...');
+        
+        answerButtons.forEach((button, index) => {
+            console.log(`Resetting button ${index}`);
+            
             // Remove all classes
             button.classList.remove('correct', 'incorrect');
             
@@ -198,23 +210,34 @@ document.addEventListener('DOMContentLoaded', () => {
             button.style.color = '';
             button.style.transform = '';
             button.style.boxShadow = '';
+            button.style.border = '';
+            button.style.outline = '';
             
             // Reset disabled state
             button.disabled = false;
             
             // Force reflow to ensure styles are applied
             void button.offsetWidth;
+            
+            // For mobile, explicitly set the default styles
+            if (isMobile) {
+                button.style.cssText = 'background-color: var(--light-color); color: var(--dark-color); border: none; border-radius: 12px; padding: 15px; font-size: 1.5rem; cursor: pointer;';
+            }
+            
+            console.log(`Button ${index} after reset:`, button.className, button.style.cssText);
         });
     }
 
     // Generate a new question based on current level
     function generateQuestion() {
+        console.log('Generating new question...');
+        
         // Reset feedback
         if (feedbackDisplay) {
             feedbackDisplay.classList.add('hidden');
         }
         
-        // Enhanced button reset for mobile
+        // Aggressive button reset for mobile
         resetAnswerButtons();
         
         // Remove warning class from timer
@@ -304,6 +327,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         
         isAnswering = false;
+        console.log('New question generated:', question);
     }
 
     // Generate answer options with the correct answer and random distractors
