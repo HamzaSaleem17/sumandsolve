@@ -505,3 +505,53 @@ document.addEventListener('DOMContentLoaded', () => {
     loadGameState();
     initGame();
 });
+// Add this function to your JavaScript file
+function setupMobileButtonEffects() {
+    if (isMobile) {
+        answerButtons.forEach(button => {
+            // Add touch events for visual feedback
+            button.addEventListener('touchstart', function(e) {
+                e.preventDefault();
+                this.style.transform = 'scale(0.95)';
+                this.style.transition = 'transform 0.1s';
+            });
+            
+            button.addEventListener('touchend', function(e) {
+                e.preventDefault();
+                this.style.transform = 'scale(1)';
+                
+                // Trigger the click event after touch ends
+                if (!isAnswering) {
+                    handleAnswer(e);
+                }
+            });
+        });
+    }
+}
+
+// Update your initGame function to call this new function
+function initGame() {
+    updateDisplay();
+    updateBadges();
+    
+    // Event listeners
+    if (startQuizBtn) {
+        startQuizBtn.addEventListener('click', startQuiz);
+    }
+    
+    if (resetBtn) {
+        resetBtn.addEventListener('click', resetGame);
+    }
+    
+    // Setup mobile button effects
+    setupMobileButtonEffects();
+    
+    // Add event listeners to answer buttons
+    answerButtons.forEach(button => {
+        // Remove existing event listeners to prevent duplicates
+        button.removeEventListener('click', handleAnswer);
+        
+        // Add click event
+        button.addEventListener('click', handleAnswer);
+    });
+}
