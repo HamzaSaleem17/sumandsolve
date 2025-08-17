@@ -36,16 +36,44 @@ document.addEventListener('DOMContentLoaded', () => {
             resetBtn.addEventListener('click', resetGame);
         }
         
+        // Add event listeners to answer buttons with mobile-specific handling
         answerButtons.forEach(button => {
+            // Remove existing event listeners to prevent duplicates
+            button.removeEventListener('click', handleAnswer);
+            button.removeEventListener('touchstart', handleTouchStart);
+            button.removeEventListener('touchend', handleTouchEnd);
+            
+            // Add new event listeners
             button.addEventListener('click', handleAnswer);
+            
             // Add touch events for mobile
-            button.addEventListener('touchstart', function(e) {
-                // Prevent default to avoid double-tap zoom
-                if (!isAnswering) {
-                    e.preventDefault();
-                }
-            });
+            if (isMobile) {
+                button.addEventListener('touchstart', handleTouchStart, { passive: false });
+                button.addEventListener('touchend', handleTouchEnd, { passive: false });
+            }
         });
+    }
+
+    // Touch event handlers for mobile
+    function handleTouchStart(e) {
+        // Prevent default to avoid double-tap zoom
+        e.preventDefault();
+        
+        // Add visual feedback
+        const button = e.target;
+        button.style.transform = 'scale(0.95)';
+        button.style.transition = 'transform 0.1s';
+    }
+
+    function handleTouchEnd(e) {
+        // Reset visual feedback
+        const button = e.target;
+        button.style.transform = 'scale(1)';
+        
+        // Trigger click event
+        if (!isAnswering) {
+            handleAnswer(e);
+        }
     }
 
     // Start the quiz
@@ -203,7 +231,7 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log(`Resetting button ${index}`);
             
             // Remove all classes
-            button.classList.remove('correct', 'incorrect');
+            button.classList.remove('correct', 'incorrect', 'clean');
             
             // Reset all inline styles
             button.style.backgroundColor = '';
@@ -212,6 +240,7 @@ document.addEventListener('DOMContentLoaded', () => {
             button.style.boxShadow = '';
             button.style.border = '';
             button.style.outline = '';
+            button.style.pointerEvents = '';
             
             // Reset disabled state
             button.disabled = false;
@@ -221,7 +250,7 @@ document.addEventListener('DOMContentLoaded', () => {
             
             // For mobile, explicitly set the default styles
             if (isMobile) {
-                button.style.cssText = 'background-color: var(--light-color); color: var(--dark-color); border: none; border-radius: 12px; padding: 15px; font-size: 1.5rem; cursor: pointer;';
+                button.style.cssText = 'background-color: var(--light-color); color: var(--dark-color); border: 2px solid #ccc; border-radius: 12px; padding: 15px; font-size: 1.5rem; cursor: pointer; font-weight: bold; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05); min-height: 44px; display: flex; align-items: center; justify-content: center;';
             }
             
             console.log(`Button ${index} after reset:`, button.className, button.style.cssText);
