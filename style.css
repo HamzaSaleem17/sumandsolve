@@ -1090,4 +1090,62 @@ nav ul li a.active::before {
     }
 }
 
+/* Mobile Navigation Improvements */
+@media screen and (max-width: 768px) {
+    nav {
+        position: relative;
+        padding: 0.5rem 0;
+    }
+    
+    nav ul {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 0.3rem 0;
+    }
+    
+    nav ul li {
+        margin: 0.2rem 0.4rem;
+    }
+    
+    nav ul li a {
+        padding: 0.3rem 0.8rem;
+        font-size: 0.9rem;
+        border-radius: 20px;
+    }
+    
+    /* Ensure quiz section is properly visible on mobile */
+    #quiz-section {
+        margin-top: 1rem;
+    }
+}
+
+/* For very small screens */
+@media screen and (max-width: 480px) {
+    nav ul {
+        padding: 0.2rem 0;
+    }
+    
+    nav ul li {
+        margin: 0.1rem 0.3rem;
+    }
+    
+    nav ul li a {
+        padding: 0.2rem 0.6rem;
+        font-size: 0.8rem;
+    }
+    
+    /* Adjust game info for very small screens */
+    .game-info {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .game-info div {
+        width: 100%;
+        text-align: center;
+        padding: 6px 8px;
+        font-size: 0.8rem;
+    }
+}
 
