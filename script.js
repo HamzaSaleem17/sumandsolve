@@ -21,11 +21,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const resetBtn = document.getElementById('reset-btn');
     const timerContainer = document.querySelector('.timer-container');
 
-    // Debug: Check if elements are found
-    console.log('Start Quiz Button:', startQuizBtn);
-    console.log('Quiz Section:', quizSection);
-    console.log('Timer Container:', timerContainer);
-
     // Initialize game
     function initGame() {
         updateDisplay();
@@ -34,9 +29,6 @@ document.addEventListener('DOMContentLoaded', () => {
         // Event listeners
         if (startQuizBtn) {
             startQuizBtn.addEventListener('click', startQuiz);
-            console.log('Event listener added to Start Quiz button');
-        } else {
-            console.error('Start Quiz button not found!');
         }
         
         if (resetBtn) {
@@ -50,23 +42,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Start the quiz
     function startQuiz() {
-        console.log('Start Quiz function called');
-        
         if (quizSection) {
             quizSection.classList.remove('hidden');
-            console.log('Quiz section revealed');
             
-            // Smooth scroll to quiz section
+            // Smooth scroll to quiz section with adjusted offset for mobile
             setTimeout(() => {
+                const offset = window.innerWidth <= 768 ? 80 : 20;
                 window.scrollTo({
-                    top: quizSection.offsetTop - 20,
+                    top: quizSection.offsetTop - offset,
                     behavior: 'smooth'
                 });
             }, 100);
             
             generateQuestion();
-        } else {
-            console.error('Quiz section not found!');
         }
     }
 
@@ -206,9 +194,15 @@ document.addEventListener('DOMContentLoaded', () => {
             feedbackDisplay.classList.add('hidden');
         }
         
+        // Completely reset all button states
         answerButtons.forEach(button => {
-            button.classList.remove('correct', 'incorrect');
+            // Remove all classes and re-add the base class
+            button.className = 'answer-button';
             button.disabled = false;
+            // Remove any inline styles that might have been applied
+            button.style.backgroundColor = '';
+            button.style.color = '';
+            button.style.transform = '';
         });
         
         // Remove warning class from timer
