@@ -159,6 +159,7 @@ header {
     box-shadow: var(--shadow);
     position: relative;
     overflow: hidden;
+    z-index: 10;
 }
 
 header::before {
@@ -247,6 +248,7 @@ nav ul li a:hover {
     color: white;
     position: relative;
     overflow: hidden;
+    z-index: 5;
 }
 
 .hero::before {
@@ -341,6 +343,7 @@ nav ul li a:hover {
     box-sizing: border-box;
     position: relative;
     overflow: hidden;
+    z-index: 10;
 }
 
 .quiz-container::before {
@@ -359,6 +362,7 @@ nav ul li a:hover {
     margin-bottom: 1.5rem;
     flex-wrap: wrap;
     gap: 0.8rem;
+    z-index: 5;
 }
 
 .game-info div {
@@ -381,6 +385,7 @@ nav ul li a:hover {
 /* Timer Progress Bar */
 .timer-container {
     margin: 0 0 1.5rem 0;
+    z-index: 5;
 }
 
 .timer-container.warning .timer-progress-bar {
@@ -411,6 +416,7 @@ nav ul li a:hover {
     text-align: center;
     margin-bottom: 1.5rem;
     position: relative;
+    z-index: 5;
 }
 
 #question {
@@ -441,6 +447,7 @@ nav ul li a:hover {
     margin-top: 1rem;
     font-weight: bold;
     animation: fadeIn 0.5s ease;
+    z-index: 5;
 }
 
 @keyframes fadeIn {
@@ -465,6 +472,7 @@ nav ul li a:hover {
     grid-template-columns: repeat(2, 1fr);
     gap: 12px;
     margin-bottom: 1.5rem;
+    z-index: 10;
 }
 
 .answer-button {
@@ -479,7 +487,10 @@ nav ul li a:hover {
     color: var(--dark-color);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
     position: relative;
-    overflow: hidden;
+    overflow: visible;
+    z-index: 20;
+    min-height: 44px;
+    touch-action: manipulation;
 }
 
 .answer-button::before {
@@ -519,6 +530,7 @@ nav ul li a:hover {
     display: flex;
     justify-content: center;
     margin: 1rem 0;
+    z-index: 10;
 }
 
 .btn-secondary {
@@ -532,6 +544,7 @@ nav ul li a:hover {
     transition: var(--transition);
     font-weight: bold;
     box-shadow: var(--shadow);
+    z-index: 10;
 }
 
 .btn-secondary:hover {
@@ -543,6 +556,7 @@ nav ul li a:hover {
 .badges-container {
     margin-top: 1.5rem;
     text-align: center;
+    z-index: 5;
 }
 
 .badges-container h3 {
@@ -570,6 +584,7 @@ nav ul li a:hover {
     gap: 12px;
     justify-content: center;
     margin-top: 0.8rem;
+    z-index: 5;
 }
 
 .cat-badge {
@@ -581,6 +596,7 @@ nav ul li a:hover {
     transition: var(--transition);
     box-shadow: var(--shadow);
     position: relative;
+    z-index: 5;
 }
 
 .cat-badge::after {
@@ -616,6 +632,7 @@ nav ul li a:hover {
 /* Content Sections */
 .content-section {
     padding: 4rem 0;
+    z-index: 5;
 }
 
 .content-section h2 {
@@ -642,6 +659,7 @@ nav ul li a:hover {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 2rem;
+    z-index: 5;
 }
 
 .feature-card, .level-card, .badge-card {
@@ -653,6 +671,7 @@ nav ul li a:hover {
     border: 1px solid rgba(0, 0, 0, 0.05);
     position: relative;
     overflow: hidden;
+    z-index: 5;
 }
 
 .feature-card::before, .level-card::before, .badge-card::before {
@@ -714,6 +733,7 @@ footer {
     padding: 2.5rem 0;
     position: relative;
     overflow: hidden;
+    z-index: 5;
 }
 
 footer::before {
@@ -865,6 +885,7 @@ nav ul li a.active::before {
     .answer-button {
         font-size: 1.4rem;
         padding: 12px;
+        min-height: 48px;
     }
     
     .feature-grid, .level-grid, .badge-grid {
@@ -954,6 +975,9 @@ nav ul li a.active::before {
         -webkit-user-select: none;
         -moz-user-select: none;
         -ms-user-select: none;
+        position: relative;
+        z-index: 30 !important;
+        pointer-events: auto !important;
     }
     
     /* Force button state reset with !important */
@@ -963,6 +987,7 @@ nav ul li a.active::before {
         border: none !important;
         box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05) !important;
         transform: none !important;
+        pointer-events: auto !important;
     }
     
     /* Add these new rules */
@@ -976,17 +1001,25 @@ nav ul li a.active::before {
     .answer-button.incorrect {
         animation: none !important;
         transition: none !important;
+        pointer-events: auto !important;
     }
     
     /* Remove any focus outlines that might persist */
     .answer-button:focus {
         outline: none !important;
         box-shadow: none !important;
+        pointer-events: auto !important;
     }
     
     /* Remove active state styling that might persist */
     .answer-button:active {
         background-color: var(--light-color) !important;
+        pointer-events: auto !important;
+    }
+    
+    /* Ensure buttons are above all other elements */
+    .answer-options {
+        z-index: 25 !important;
     }
 }
 
@@ -1047,6 +1080,7 @@ nav ul li a.active::before {
     .answer-button {
         font-size: 1.2rem;
         padding: 12px;
+        min-height: 44px;
     }
     
     .cat-badge {
@@ -1111,6 +1145,13 @@ nav ul li a.active::before {
     .blog-cta p {
         font-size: 1rem;
     }
+    
+    /* Extra button fixes for very small screens */
+    .answer-button {
+        min-height: 44px !important;
+        z-index: 30 !important;
+        pointer-events: auto !important;
+    }
 }
 
 @media screen and (max-width: 320px) {
@@ -1138,6 +1179,7 @@ nav ul li a.active::before {
     .answer-button {
         font-size: 1.1rem;
         padding: 10px;
+        min-height: 44px !important;
     }
     
     .cat-badge {
@@ -1153,6 +1195,12 @@ nav ul li a.active::before {
     .timer-progress-bar {
         height: 8px;
     }
+    
+    /* Ensure buttons are still clickable on smallest screens */
+    .answer-button {
+        z-index: 30 !important;
+        pointer-events: auto !important;
+    }
 }
 
 /* Button reset class for mobile */
@@ -1162,4 +1210,6 @@ nav ul li a.active::before {
     border: none !important;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05) !important;
     transform: none !important;
+    z-index: 30 !important;
+    pointer-events: auto !important;
 }
