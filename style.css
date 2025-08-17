@@ -1090,81 +1090,43 @@ nav ul li a.active::before {
     }
 }
 
-/* Mobile Navigation Improvements */
-@media screen and (max-width: 768px) {
-    nav {
-        position: relative;
-        padding: 0.5rem 0;
-    }
-    
-    nav ul {
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: center;
-        padding: 0.3rem 0;
-    }
-    
-    nav ul li {
-        margin: 0.2rem 0.4rem;
-    }
-    
-    nav ul li a {
-        padding: 0.3rem 0.8rem;
-        font-size: 0.9rem;
-        border-radius: 20px;
-    }
-    
-    /* Ensure quiz section is properly visible on mobile */
-    #quiz-section {
-        margin-top: 1rem;
-    }
-}
-
-/* For very small screens */
-@media screen and (max-width: 480px) {
-    nav ul {
-        padding: 0.2rem 0;
-    }
-    
-    nav ul li {
-        margin: 0.1rem 0.3rem;
-    }
-    
-    nav ul li a {
-        padding: 0.2rem 0.6rem;
-        font-size: 0.8rem;
-    }
-    
-    /* Adjust game info for very small screens */
-    .game-info {
-        flex-direction: column;
-        gap: 0.5rem;
-    }
-    
-    .game-info div {
-        width: 100%;
-        text-align: center;
-        padding: 6px 8px;
-        font-size: 0.8rem;
-    }
-}
 /* Mobile-specific button fixes */
 @media screen and (max-width: 768px) {
     .answer-button {
         -webkit-tap-highlight-color: transparent;
         touch-action: manipulation;
-        transition: background-color 0.2s ease;
+        transition: background-color 0.1s ease;
+        user-select: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
     }
     
-    .answer-button.correct,
-    .answer-button.incorrect {
-        animation: none !important;
-    }
-    
-    /* Force button state reset */
+    /* Force button state reset with !important */
     .answer-button:not(.correct):not(.incorrect) {
         background-color: var(--light-color) !important;
         color: var(--dark-color) !important;
+        border: none !important;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05) !important;
+        transform: none !important;
+    }
+    
+    /* Override any lingering styles */
+    .answer-button.correct,
+    .answer-button.incorrect {
+        animation: none !important;
+        transition: none !important;
+    }
+    
+    /* Remove any focus outlines that might persist */
+    .answer-button:focus {
+        outline: none !important;
+        box-shadow: none !important;
+    }
+    
+    /* Remove active state styling that might persist */
+    .answer-button:active {
+        background-color: var(--light-color) !important;
     }
 }
 
@@ -1226,4 +1188,5 @@ nav ul li a.active::before {
         font-size: 0.8rem;
     }
 }
+
 
