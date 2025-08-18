@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let timerInterval;
     let timeLeft = 30;
     let isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-
+    
     // DOM elements
     const startQuizBtn = document.getElementById('start-quiz-btn');
     const quizSection = document.getElementById('quiz-section');
@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const badgesContainer = document.getElementById('badges');
     const resetBtn = document.getElementById('reset-btn');
     const timerContainer = document.querySelector('.timer-container');
-
+    
     // Initialize game
     function initGame() {
         updateDisplay();
@@ -36,46 +36,42 @@ document.addEventListener('DOMContentLoaded', () => {
             resetBtn.addEventListener('click', resetGame);
         }
         
-        // Add event listeners to answer buttons with mobile-specific handling
+        // Add event listeners to answer buttons
         answerButtons.forEach(button => {
             // Remove existing event listeners to prevent duplicates
             button.removeEventListener('click', handleAnswer);
-            button.removeEventListener('touchstart', handleTouchStart);
-            button.removeEventListener('touchend', handleTouchEnd);
             
-            // Add new event listeners
+            // Add click event
             button.addEventListener('click', handleAnswer);
             
-            // Add touch events for mobile
+            // Add touch events for mobile - FIXED
             if (isMobile) {
-                button.addEventListener('touchstart', handleTouchStart, { passive: false });
-                button.addEventListener('touchend', handleTouchEnd, { passive: false });
+                button.addEventListener('touchstart', handleTouchStart, { passive: true });
+                button.addEventListener('touchend', handleTouchEnd, { passive: true });
             }
         });
     }
-
-    // Touch event handlers for mobile
+    
+    // Touch event handlers for mobile - FIXED
     function handleTouchStart(e) {
-        // Prevent default to avoid double-tap zoom
-        e.preventDefault();
-        
+        const button = e.target;
         // Add visual feedback
-        const button = e.target;
-        button.style.transform = 'scale(0.95)';
-        button.style.transition = 'transform 0.1s';
+        button.classList.add('touch-active');
     }
-
+    
     function handleTouchEnd(e) {
-        // Reset visual feedback
         const button = e.target;
-        button.style.transform = 'scale(1)';
+        // Remove visual feedback
+        button.classList.remove('touch-active');
         
-        // Trigger click event
-        if (!isAnswering) {
-            handleAnswer(e);
-        }
+        // Trigger click event after a short delay
+        setTimeout(() => {
+            if (!isAnswering) {
+                handleAnswer(e);
+            }
+        }, 50);
     }
-
+    
     // Start the quiz
     function startQuiz() {
         if (quizSection) {
@@ -93,7 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
             generateQuestion();
         }
     }
-
+    
     // Reset the game
     function resetGame() {
         // Clear timer
@@ -118,7 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Show notification
         showNotification('Game has been reset!');
     }
-
+    
     // Update display elements
     function updateDisplay() {
         if (scoreDisplay) scoreDisplay.textContent = currentScore;
@@ -128,7 +124,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Update level based on score
         updateLevelBasedOnScore();
     }
-
+    
     // Update level based on score
     function updateLevelBasedOnScore() {
         const newLevel = Math.floor(currentScore / 100) + 1;
@@ -145,7 +141,7 @@ document.addEventListener('DOMContentLoaded', () => {
             updateBadges();
         }
     }
-
+    
     // Start the timer
     function startTimer() {
         timeLeft = 30;
@@ -193,7 +189,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }, 1000);
     }
-
+    
     // Handle when time runs out
     function handleTimeUp() {
         if (isAnswering) return;
@@ -222,8 +218,8 @@ document.addEventListener('DOMContentLoaded', () => {
             generateQuestion();
         }, 1500);
     }
-
-    // Aggressive button reset function for mobile compatibility
+    
+    // Aggressive button reset function for mobile compatibility - FIXED
     function resetAnswerButtons() {
         console.log('Resetting answer buttons...');
         
@@ -231,16 +227,7 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log(`Resetting button ${index}`);
             
             // Remove all classes
-            button.classList.remove('correct', 'incorrect', 'clean');
-            
-            // Reset all inline styles
-            button.style.backgroundColor = '';
-            button.style.color = '';
-            button.style.transform = '';
-            button.style.boxShadow = '';
-            button.style.border = '';
-            button.style.outline = '';
-            button.style.pointerEvents = '';
+            button.classList.remove('correct', 'incorrect', 'touch-active');
             
             // Reset disabled state
             button.disabled = false;
@@ -248,15 +235,10 @@ document.addEventListener('DOMContentLoaded', () => {
             // Force reflow to ensure styles are applied
             void button.offsetWidth;
             
-            // For mobile, explicitly set the default styles
-            if (isMobile) {
-                button.style.cssText = 'background-color: var(--light-color); color: var(--dark-color); border: 2px solid #ccc; border-radius: 12px; padding: 15px; font-size: 1.5rem; cursor: pointer; font-weight: bold; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05); min-height: 44px; display: flex; align-items: center; justify-content: center;';
-            }
-            
-            console.log(`Button ${index} after reset:`, button.className, button.style.cssText);
+            console.log(`Button ${index} after reset:`, button.className);
         });
     }
-
+    
     // Generate a new question based on current level
     function generateQuestion() {
         console.log('Generating new question...');
@@ -358,7 +340,7 @@ document.addEventListener('DOMContentLoaded', () => {
         isAnswering = false;
         console.log('New question generated:', question);
     }
-
+    
     // Generate answer options with the correct answer and random distractors
     function generateAnswerOptions(correctAnswer) {
         const options = [correctAnswer];
@@ -380,7 +362,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Shuffle options
         return options.sort(() => Math.random() - 0.5);
     }
-
+    
     // Handle answer selection
     function handleAnswer(e) {
         if (isAnswering) return;
@@ -428,7 +410,7 @@ document.addEventListener('DOMContentLoaded', () => {
             generateQuestion();
         }, 1500);
     }
-
+    
     // Show feedback message
     function showFeedback(message, type) {
         if (feedbackDisplay) {
@@ -437,7 +419,7 @@ document.addEventListener('DOMContentLoaded', () => {
             feedbackDisplay.classList.remove('hidden');
         }
     }
-
+    
     // Update badges display
     function updateBadges() {
         if (badgesContainer) {
@@ -457,7 +439,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
     }
-
+    
     // Show notification
     function showNotification(message) {
         const notification = document.createElement('div');
@@ -478,7 +460,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 300);
         }, 3000);
     }
-
+    
     // Load saved game state (only for current session)
     function loadGameState() {
         const savedScore = sessionStorage.getItem('userScore');
@@ -500,58 +482,8 @@ document.addEventListener('DOMContentLoaded', () => {
         updateDisplay();
         updateBadges();
     }
-
+    
     // Initialize the game
     loadGameState();
     initGame();
 });
-// Add this function to your JavaScript file
-function setupMobileButtonEffects() {
-    if (isMobile) {
-        answerButtons.forEach(button => {
-            // Add touch events for visual feedback
-            button.addEventListener('touchstart', function(e) {
-                e.preventDefault();
-                this.style.transform = 'scale(0.95)';
-                this.style.transition = 'transform 0.1s';
-            });
-            
-            button.addEventListener('touchend', function(e) {
-                e.preventDefault();
-                this.style.transform = 'scale(1)';
-                
-                // Trigger the click event after touch ends
-                if (!isAnswering) {
-                    handleAnswer(e);
-                }
-            });
-        });
-    }
-}
-
-// Update your initGame function to call this new function
-function initGame() {
-    updateDisplay();
-    updateBadges();
-    
-    // Event listeners
-    if (startQuizBtn) {
-        startQuizBtn.addEventListener('click', startQuiz);
-    }
-    
-    if (resetBtn) {
-        resetBtn.addEventListener('click', resetGame);
-    }
-    
-    // Setup mobile button effects
-    setupMobileButtonEffects();
-    
-    // Add event listeners to answer buttons
-    answerButtons.forEach(button => {
-        // Remove existing event listeners to prevent duplicates
-        button.removeEventListener('click', handleAnswer);
-        
-        // Add click event
-        button.addEventListener('click', handleAnswer);
-    });
-}
