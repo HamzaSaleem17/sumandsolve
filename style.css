@@ -306,22 +306,19 @@ nav ul li a:hover {
     position: relative;
     overflow: hidden;
     z-index: 10;
-    transform: translateY(0); /* Reset transform */
 }
 
 /* Desktop-specific positioning - FIXED */
 @media screen and (min-width: 769px) {
     .quiz-container {
-        transform: translateY(96px); /* Move down 1 inch (96px) */
-        margin-top: 0; /* Ensure no additional margin */
+        margin-top: 96px; /* 1 inch down (96px) */
     }
 }
 
 /* Tablet and Mobile-specific positioning - FIXED */
 @media screen and (max-width: 768px) {
     .quiz-container {
-        transform: translateY(-96px); /* Move up 1 inch (96px) */
-        margin-top: 0; /* Ensure no additional margin */
+        margin-top: -96px; /* 1 inch up (-96px) */
         padding: 1.5rem;
     }
 }
@@ -485,13 +482,13 @@ nav ul li a:hover {
         min-height: 50px;
     }
     
-    /* Active state for mobile highlighting */
+    /* Active state for mobile highlighting - ENHANCED */
     .answer-button:active {
-        background-color: var(--primary-color);
-        color: white;
-        border-color: var(--primary-color);
+        background-color: var(--primary-color) !important;
+        color: white !important;
+        border-color: var(--primary-color) !important;
         transform: translateY(-3px);
-        box-shadow: 0 8px 20px rgba(99, 102, 241, 0.3);
+        box-shadow: 0 8px 25px rgba(99, 102, 241, 0.6);
     }
     
     /* Focus state for accessibility */
